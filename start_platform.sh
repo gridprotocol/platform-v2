@@ -1,0 +1,1 @@
+nohup ./platform daemon run > platform.log 2>&1 &
