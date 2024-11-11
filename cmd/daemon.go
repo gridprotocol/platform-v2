@@ -13,7 +13,10 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/mitchellh/go-homedir"
+	"github.com/rockiecn/platform/database"
+	"github.com/rockiecn/platform/dumper"
 	"github.com/rockiecn/platform/server"
 	"github.com/urfave/cli/v2"
 )
@@ -38,13 +41,38 @@ var runCmd = &cli.Command{
 			Usage:   "input your endpoint",
 			Value:   "0.0.0.0:8081",
 		},
+		&cli.StringFlag{
+			Name:  "chain",
+			Usage: "input chain name, e.g.(dev)",
+			Value: "dev",
+		},
 	},
 	Action: func(ctx *cli.Context) error {
 		endPoint := ctx.String("endpoint")
+		chain := ctx.String("chain")
 
 		opts := server.ServerOption{
 			Endpoint: endPoint,
 		}
+
+		err := database.InitDatabase("~/grid")
+		if err != nil {
+			return err
+		}
+
+		// set registry contract address or market contract address
+		registryAddress := common.Address{}
+		marketAddress := common.Address{}
+		dumper, err := dumper.NewGRIDDumper(chain, registryAddress, marketAddress)
+		if err != nil {
+			return err
+		}
+
+		err = dumper.DumpGRID()
+		if err != nil {
+			return err
+		}
+		go dumper.SubscribeGRID(context.TODO())
 
 		// create http server with routes
 		srv := server.NewServer(opts)
