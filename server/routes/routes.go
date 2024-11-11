@@ -43,7 +43,8 @@ func RegistRoutes() Routes {
 	r.registRootRoute()
 
 	// for functions
-	r.registListRoute()
+	r.registProviderRoute()
+	r.registNodeRoute()
 	r.registOrderRoute()
 
 	return r
@@ -56,25 +57,22 @@ func (r Routes) registRootRoute() {
 	})
 }
 
-// gateway list, list all nodes' gateway info
-func (r Routes) registListRoute() {
+// provider info in platform
+func (r Routes) registProviderRoute() {
+	r.GET("/v1/provider/:address/info", GetProviderInfoHandler())
+	r.GET("/v1/provider/list", ListProviderHandler())
+}
 
-	// read nodes from config
-	nodes := ReadList()
-
-	// response node list
-	r.GET("/list", func(c *gin.Context) {
-		c.JSON(http.StatusOK, nodes)
-	})
+// node info in platform
+func (r Routes) registNodeRoute() {
+	r.GET("/v1/node/:id/info", GetNodeInfoHandler())
+	r.GET("/v1/node/list", ListNodeHandler())
 }
 
 // order operation in platform
 func (r Routes) registOrderRoute() {
-	or := OrderInfo{ID: "123", Resource: "res", Duration: "dur", Price: "100"}
-	// response order
-	r.GET("/order", func(c *gin.Context) {
-		c.JSON(http.StatusOK, or)
-	})
+	r.GET("/v1/user/:address/order/list", ListActivedOrderHandler())
+	r.GET("/v1/user/:address/provider/list", ListOrderedProviderHandler())
 }
 
 func cors() gin.HandlerFunc {

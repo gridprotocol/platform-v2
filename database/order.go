@@ -3,7 +3,8 @@ package database
 import "time"
 
 type Order struct {
-	Address      string
+	User         string
+	Provider     string
 	Id           int
 	ActivateTime time.Time `gorm:"column:activate"`
 	StartTime    time.Time `gorm:"column:start"`
@@ -22,9 +23,9 @@ func (o *Order) CreateOrder() error {
 	return GlobalDataBase.Create(o).Error
 }
 
-func GetOrderByAddressAndId(address string, id int64) (Order, error) {
+func GetOrderByNodeId(address string, id int64) (Order, error) {
 	var order Order
-	err := GlobalDataBase.Model(&Order{}).Where("address = ? AND id = ?", address, id).Last(&order).Error
+	err := GlobalDataBase.Model(&Order{}).Where("provider = ? AND id = ?", address, id).Last(&order).Error
 	if err != nil {
 		return Order{}, err
 	}
@@ -36,6 +37,17 @@ func ListAllActivedOrder() ([]Order, error) {
 	var now = time.Now()
 	var orders []Order
 	err := GlobalDataBase.Model(&Order{}).Where("start < ? AND end > ?", now, now).Find(&orders).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return orders, nil
+}
+
+func ListAllActivedOrderByUser(address string) ([]Order, error) {
+	var now = time.Now()
+	var orders []Order
+	err := GlobalDataBase.Model(&Order{}).Where("user = ? AND start < ? AND end > ?", address, now, now).Find(&orders).Error
 	if err != nil {
 		return nil, err
 	}

@@ -32,6 +32,16 @@ func GetProviderByAddress(address string) (Provider, error) {
 	return provider, nil
 }
 
+func ListAllProviders() ([]Provider, error) {
+	var providers []Provider
+	err := GlobalDataBase.Model(&Provider{}).Find(&providers).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return providers, nil
+}
+
 type Node struct {
 	Address string
 	Id      int
@@ -86,6 +96,26 @@ func GetNodeByAddressAndId(address string, id int) (Node, error) {
 	}
 
 	return NodeStoreToNode(nodeStore)
+}
+
+func ListAllNodesByProvider(address string) ([]NodeStore, error) {
+	var nodeStores []NodeStore
+	err := GlobalDataBase.Model(&NodeStore{}).Where("address = ?", address).Find(&nodeStores).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return nodeStores, nil
+}
+
+func ListAllNodes() ([]NodeStore, error) {
+	var nodeStores []NodeStore
+	err := GlobalDataBase.Model(&NodeStore{}).Find(&nodeStores).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return nodeStores, nil
 }
 
 func NodeToNodeStore(node Node) (NodeStore, error) {

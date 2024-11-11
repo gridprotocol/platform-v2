@@ -135,7 +135,19 @@ func (d *Dumper) DumpGRID() error {
 			err = d.HandleAddNode(event)
 		case "CreateOrder":
 			logger.Info("Handle Create Order Event")
-			err = d.HandleCreateOrder(event)
+			tx, _, err := client.TransactionByHash(context.TODO(), event.TxHash)
+			if err != nil {
+				logger.Error(err.Error())
+				break
+			}
+
+			address, err := types.LatestSignerForChainID(tx.ChainId()).Sender(tx)
+			if err != nil {
+				logger.Error(err.Error())
+				break
+			}
+
+			err = d.HandleCreateOrder(event, address)
 		default:
 			continue
 		}
@@ -198,21 +210,18 @@ func (d *Dumper) HandleRegister(log types.Log) error {
 		Port:    out.Port,
 	}
 
-	err = providerInfo.CreateProvider()
-	if err != nil {
-		return err
-	}
+	return providerInfo.CreateProvider()
 
-	now := time.Now()
-	profitInfo := database.Profit{
-		Address:  out.Cp.Hex(),
-		Balance:  big.NewInt(0),
-		Profit:   big.NewInt(0),
-		Penalty:  big.NewInt(0),
-		LastTime: now,
-		EndTime:  now,
-	}
-	return profitInfo.CreateProfit()
+	// now := time.Now()
+	// profitInfo := database.Profit{
+	// 	Address:  out.Cp.Hex(),
+	// 	Balance:  big.NewInt(0),
+	// 	Profit:   big.NewInt(0),
+	// 	Penalty:  big.NewInt(0),
+	// 	LastTime: now,
+	// 	EndTime:  now,
+	// }
+	// return profitInfo.CreateProfit()
 }
 
 type AddNodeEvent struct {
@@ -278,7 +287,7 @@ type CreateOrderEvent struct {
 	Duration   *big.Int
 }
 
-func (d *Dumper) HandleCreateOrder(log types.Log) error {
+func (d *Dumper) HandleCreateOrder(log types.Log, from common.Address) error {
 	var out CreateOrderEvent
 	err := d.unpack(log, d.contractABI[1], &out)
 	if err != nil {
@@ -288,7 +297,8 @@ func (d *Dumper) HandleCreateOrder(log types.Log) error {
 	startTime := out.ActiveTime.Add(out.ActiveTime, out.Probation)
 	endTime := startTime.Add(startTime, out.Duration)
 	orderInfo := database.Order{
-		Address:      out.Address.Hex(),
+		User:         from.Hex(),
+		Provider:     out.Address.Hex(),
 		Id:           int(out.ID),
 		ActivateTime: time.Unix(out.ActiveTime.Int64(), 0),
 		StartTime:    time.Unix(startTime.Int64(), 0),
@@ -297,31 +307,9 @@ func (d *Dumper) HandleCreateOrder(log types.Log) error {
 		Duration:     out.Duration.Int64(),
 	}
 
-	err = orderInfo.CreateOrder()
-	if err != nil {
-		return err
-	}
-
-	nodeInfo, err := database.GetNodeByAddressAndId(orderInfo.Address, orderInfo.Id)
-	if err != nil {
-		return err
-	}
-
-	profitInfo, err := database.GetProfitByAddress(orderInfo.Address)
-	if err != nil {
-		return err
-	}
-
-	// (cpuPrice + gpuPrice + memPrice + diskPrice) * duration
-	price := new(big.Int).Add(nodeInfo.CPUPrice, nodeInfo.GPUPrice)
-	price.Add(price, nodeInfo.MemPrice)
-	price.Add(price, nodeInfo.DiskPrice)
-	price.Mul(price, big.NewInt(orderInfo.Duration))
-
-	profitInfo.Profit.Add(profitInfo.Profit, price)
-	if orderInfo.EndTime.Compare(profitInfo.EndTime) == 1 {
-		profitInfo.EndTime = orderInfo.EndTime
-	}
-
-	return profitInfo.UpdateProfit()
+	return orderInfo.CreateOrder()
 }
+
+// func recoverAddressFromTx(tx *types.Transaction) (common.Address, error) {
+// 	return types.LatestSignerForChainID(tx.ChainId()).Sender(tx)
+// }
