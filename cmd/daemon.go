@@ -72,7 +72,7 @@ var runCmd = &cli.Command{
 		if err != nil {
 			return err
 		}
-		go dumper.SubscribeGRID(context.TODO())
+		go dumper.SubscribeGRID(ctx.Context)
 
 		// create http server with routes
 		srv := server.NewServer(opts)
@@ -90,7 +90,7 @@ var runCmd = &cli.Command{
 		<-quit
 		log.Println("Shutting down server...")
 
-		cctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		cctx, cancel := context.WithTimeout(ctx.Context, 5*time.Second)
 		defer cancel()
 		if err := srv.Shutdown(cctx); err != nil {
 			log.Fatal("Server forced to shutdown: ", err)

@@ -54,3 +54,15 @@ func ListAllActivedOrderByUser(address string) ([]Order, error) {
 
 	return orders, nil
 }
+
+func ListAllOrderedProvider(address string) ([]Provider, error) {
+	var now = time.Now()
+	var provider []Provider
+	err := GlobalDataBase.Model(&Order{}).Where("user = ? AND start < ? AND end > ?", address, now, now).
+		Joins("right join provider on order.provider = provider.addresss").Find(&provider).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return provider, nil
+}
