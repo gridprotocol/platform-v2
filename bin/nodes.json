@@ -1,0 +1,14 @@
+[
+  {
+    "name": "test",
+    "entrance": "127.0.0.1:8080",
+    "resource": "empty",
+    "price": "empty"
+  },
+  {
+    "name": "node2",
+    "entrance": "empty",
+    "resource": "empty",
+    "price": "empty"
+  }
+]

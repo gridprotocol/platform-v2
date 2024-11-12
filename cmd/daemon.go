@@ -3,7 +3,7 @@ package cmd
 import (
 	"context"
 	"fmt"
-	"log"
+
 	"net/http"
 	"os"
 	"os/exec"
@@ -14,12 +14,18 @@ import (
 	"time"
 
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/grid/contracts/eth"
+	comm "github.com/gridprotocol/platform-v2/common"
+	"github.com/gridprotocol/platform-v2/database"
+	"github.com/gridprotocol/platform-v2/dumper"
+	"github.com/gridprotocol/platform-v2/lib/config"
+	"github.com/gridprotocol/platform-v2/logs"
+	"github.com/gridprotocol/platform-v2/server"
 	"github.com/mitchellh/go-homedir"
-	"github.com/rockiecn/platform/database"
-	"github.com/rockiecn/platform/dumper"
-	"github.com/rockiecn/platform/server"
 	"github.com/urfave/cli/v2"
 )
+
+var logger = logs.Logger("daemon")
 
 var DaemonCmd = &cli.Command{
 	Name:  "daemon",
@@ -36,42 +42,71 @@ var runCmd = &cli.Command{
 	Usage: "run server",
 	Flags: []cli.Flag{
 		&cli.StringFlag{
-			Name:    "endpoint",
-			Aliases: []string{"e"},
-			Usage:   "input your endpoint",
-			Value:   "0.0.0.0:8081",
-		},
-		&cli.StringFlag{
 			Name:  "chain",
 			Usage: "input chain name, e.g.(dev)",
 			Value: "dev",
 		},
 	},
 	Action: func(ctx *cli.Context) error {
-		endPoint := ctx.String("endpoint")
 		chain := ctx.String("chain")
 
-		opts := server.ServerOption{
-			Endpoint: endPoint,
+		// parse config file
+		err := config.InitConfig()
+		if err != nil {
+			logger.DPanicf("failed to init the config: %v", err)
+		}
+		ep := config.GetConfig().Http.Listen
+		logger.Info("server endpoint:", ep)
+
+		var chain_ep string
+
+		// select contracts addresses for each chain
+		switch chain {
+		case "local":
+			chain_ep = eth.Ganache
+			comm.Contracts = comm.LocalContracts.Contracts
+		case "dev":
+			chain_ep = eth.DevChain
+			comm.Contracts = comm.DevContracts.Contracts
+		case "sepo":
+			chain_ep = eth.Sepolia
+			comm.Contracts = comm.SepoContracts.Contracts
 		}
 
-		err := database.InitDatabase("~/grid")
+		logger.Infof("chain selected:%s, chain endpoint:%s\n", chain, chain_ep)
+		logger.Infof("contract addresses:", comm.Contracts)
+
+		// listen endpoint and chain endpoint
+		opts := server.ServerOption{
+			Endpoint:       ep,
+			Chain_Endpoint: chain_ep,
+		}
+
+		// init db
+		logger.Info("init db..")
+		err = database.InitDatabase("~/grid")
 		if err != nil {
 			return err
 		}
 
+		// set address
+		registryAddress := common.HexToAddress(comm.Contracts.Registry)
+		marketAddress := common.HexToAddress(comm.Contracts.Market)
+
+		logger.Info("init dumper..", chain, registryAddress, marketAddress)
 		// set registry contract address or market contract address
-		registryAddress := common.Address{}
-		marketAddress := common.Address{}
 		dumper, err := dumper.NewGRIDDumper(chain, registryAddress, marketAddress)
 		if err != nil {
 			return err
 		}
 
+		// sync chain for db
 		err = dumper.DumpGRID()
 		if err != nil {
 			return err
 		}
+
+		logger.Info("sync db with block chain..")
 		go dumper.SubscribeGRID(ctx.Context)
 
 		// create http server with routes
@@ -79,8 +114,9 @@ var runCmd = &cli.Command{
 
 		// start server
 		go func() {
+			logger.Info("start listen..")
 			if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-				log.Fatalf("listen: %s\n", err)
+				logger.Fatalf("listen: %s\n", err)
 			}
 		}()
 
@@ -88,15 +124,15 @@ var runCmd = &cli.Command{
 
 		signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 		<-quit
-		log.Println("Shutting down server...")
+		logger.Info("Shutting down server...")
 
 		cctx, cancel := context.WithTimeout(ctx.Context, 5*time.Second)
 		defer cancel()
 		if err := srv.Shutdown(cctx); err != nil {
-			log.Fatal("Server forced to shutdown: ", err)
+			logger.Fatal("Server forced to shutdown: ", err)
 		}
 
-		log.Println("Server exiting")
+		logger.Info("Server exiting")
 		return nil
 	},
 }
@@ -116,7 +152,7 @@ var stopCmd = &cli.Command{
 		if err != nil {
 			return err
 		}
-		log.Println("gateway gracefully exit...")
+		logger.Info("gateway gracefully exit...")
 
 		return nil
 	},

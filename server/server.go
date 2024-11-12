@@ -5,11 +5,12 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/rockiecn/platform/server/routes"
+	"github.com/gridprotocol/platform-v2/server/routes"
 )
 
 type ServerOption struct {
-	Endpoint string
+	Endpoint       string
+	Chain_Endpoint string
 }
 
 func NewServer(opt ServerOption) *http.Server {

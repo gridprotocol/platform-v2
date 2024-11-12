@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/rockiecn/platform/database"
+	"github.com/gridprotocol/platform-v2/database"
 	"golang.org/x/xerrors"
 )
 

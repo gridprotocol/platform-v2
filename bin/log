@@ -1,0 +1,9 @@
+endpoint: 0.0.0.0:8002
+chain selected:dev, chain endpoint:https://devchain.metamemo.one:8501
+contract addresses: {v0.5.3 0x51F7811eEb5c5c028a3931567505ec463EFA64c9 0x52A630Cc232D18DB475a01E2F3eA6F9aEdAE2981   0xfC865296074c896cAFf8d1e67C40bd44FeDe36f2 0xB104b8C244c6218d03B55477bD7b75CC97cdBD19 0x6c6E1Eae1a7F44ABB9Ae13910900a00c55890710 0x1eE68eDA419A2aC8D1D4fAaE6dd32CcF78fBfb3f 0x0EDbc74128eACB6cDaB5C80834BBE2E9e749cCAD 0x5EF754Ef66Bf033de46436445F855d295e8E35CF 0x8b746ade7Bf8350e9BA8a33c3B52eA8bFD14424A}
+{"level":"INFO","time":"2024-11-12T10:43:07+08:00","sub":"server","caller":"server/server.go:29","msg":"Server Start"}
+badger 2024/11/12 10:43:07 INFO: All 0 tables opened in 0s
+badger 2024/11/12 10:43:07 INFO: Replaying file id: 0 at offset: 0
+badger 2024/11/12 10:43:07 INFO: Replay took: 1.875µs
+chain id: 2985
+[GIN] 2024/11/12 - 10:43:15 | 200 |  1.613264083s |             ::1 | GET      "/version"

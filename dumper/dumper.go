@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/rockiecn/platform/database"
-	"github.com/rockiecn/platform/logs"
+	"github.com/gridprotocol/platform-v2/database"
+	"github.com/gridprotocol/platform-v2/logs"
 
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi"

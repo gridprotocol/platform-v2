@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/rockiecn/platform/database"
+	"github.com/gridprotocol/platform-v2/database"
 )
 
 func ListActivedOrderHandler() gin.HandlerFunc {

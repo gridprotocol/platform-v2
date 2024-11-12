@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/rockiecn/platform/logs"
+	"github.com/gridprotocol/platform-v2/logs"
 
 	// "gorm.io/driver/mysql"
 

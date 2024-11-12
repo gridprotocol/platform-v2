@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/rockiecn/platform/cmd"
+	"github.com/gridprotocol/platform-v2/cmd"
 	"github.com/urfave/cli/v2"
 )
 
