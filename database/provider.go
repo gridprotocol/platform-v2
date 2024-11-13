@@ -61,7 +61,7 @@ type Node struct {
 
 type NodeStore struct {
 	Address string `gorm:"primaryKey"`
-	Id      int    `gorm:"primaryKey"`
+	Id      int    `gorm:"primaryKey;autoIncrement:false"`
 
 	CPUPrice string
 	CPUModel string

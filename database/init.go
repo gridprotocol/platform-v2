@@ -20,14 +20,19 @@ import (
 var GlobalDataBase *gorm.DB
 var logger = logs.Logger("database")
 
+// init a gorm db with path
 func InitDatabase(path string) error {
+	// full path
 	dir, err := homedir.Expand(path)
 	if err != nil {
 		return err
 	}
+	logger.Info("db path: ", dir)
 
+	// if dir not exist, make it
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
-		err := os.MkdirAll(dir, 0666)
+		logger.Info("make dir")
+		err := os.MkdirAll(dir, 0755)
 		if err != nil {
 			return err
 		}
@@ -39,11 +44,13 @@ func InitDatabase(path string) error {
 	// 	return err
 	// }
 
+	// open gorm db
 	db, err := gorm.Open(sqlite.Open(filepath.Join(dir, "grid.db")), &gorm.Config{})
 	if err != nil {
 		return err
 	}
 
+	// get sql db from gorm db
 	sqlDB, err := db.DB()
 	if err != nil {
 		return err
@@ -56,14 +63,17 @@ func InitDatabase(path string) error {
 	// 设置超时时间
 	sqlDB.SetConnMaxLifetime(time.Second * 30)
 
+	// ping db
 	err = sqlDB.Ping()
 	if err != nil {
 		return err
 	}
+
 	db.AutoMigrate(&Order{}, &ProfitStore{}, &BlockNumber{}, &Provider{}, &NodeStore{})
 	GlobalDataBase = db
 
 	logger.Info("init database success")
+
 	return nil
 }
 

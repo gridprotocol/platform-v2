@@ -84,30 +84,32 @@ var runCmd = &cli.Command{
 
 		// init db
 		logger.Info("init db..")
-		err = database.InitDatabase("~/grid")
+		err = database.InitDatabase("./grid")
 		if err != nil {
 			return err
 		}
 
-		// set address
+		// contract address
 		registryAddress := common.HexToAddress(comm.Contracts.Registry)
 		marketAddress := common.HexToAddress(comm.Contracts.Market)
 
-		logger.Info("init dumper..", chain, registryAddress, marketAddress)
-		// set registry contract address or market contract address
+		logger.Info("init dumper..")
+		logger.Info(chain, registryAddress, marketAddress)
+		// init dumper
 		dumper, err := dumper.NewGRIDDumper(chain, registryAddress, marketAddress)
 		if err != nil {
 			return err
 		}
 
-		// sync chain for db
+		logger.Info("first dump..")
 		err = dumper.DumpGRID()
 		if err != nil {
 			return err
 		}
 
+		// sync chain for db
 		logger.Info("sync db with block chain..")
-		go dumper.SubscribeGRID(ctx.Context)
+		//go dumper.SubscribeGRID(ctx.Context)
 
 		// create http server with routes
 		srv := server.NewServer(opts)
