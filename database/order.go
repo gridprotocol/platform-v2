@@ -24,14 +24,37 @@ func (o *Order) CreateOrder() error {
 	return GlobalDataBase.Create(o).Error
 }
 
-func GetOrderByNodeId(address string, id int64) (Order, error) {
+// get order by order id
+func GetOrderById(id uint64) (Order, error) {
 	var order Order
-	err := GlobalDataBase.Model(&Order{}).Where("provider = ? AND id = ?", address, id).Last(&order).Error
+	err := GlobalDataBase.Model(&Order{}).Where("id = ?", id).Last(&order).Error
 	if err != nil {
 		return Order{}, err
 	}
 
 	return order, nil
+}
+
+// get order list of an user
+func GetOrdersByUser(user string) ([]Order, error) {
+	var orders []Order
+	err := GlobalDataBase.Model(&Order{}).Where("user = ?", user).Find(&orders).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return orders, nil
+}
+
+// get all provider address of an user
+func GetProsByUser(user string) ([]string, error) {
+	var pros []string
+	err := GlobalDataBase.Model(&Order{}).Select("provider").Where("user = ?", user).Find(&pros).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return pros, nil
 }
 
 func ListAllActivedOrder() ([]Order, error) {

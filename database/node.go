@@ -53,9 +53,10 @@ func (n *Node) CreateNode() error {
 	return GlobalDataBase.Create(&nodeStore).Error
 }
 
-func GetNodeByAddressAndId(address string, id int) (Node, error) {
+// get node with cp and id
+func GetNodeByCpAndId(cp string, id int) (Node, error) {
 	var nodeStore NodeStore
-	err := GlobalDataBase.Model(&NodeStore{}).Where("address = ? AND id = ?", address, id).First(&nodeStore).Error
+	err := GlobalDataBase.Model(&NodeStore{}).Where("address = ? AND id = ?", cp, id).First(&nodeStore).Error
 	if err != nil {
 		return Node{}, err
 	}
@@ -63,9 +64,10 @@ func GetNodeByAddressAndId(address string, id int) (Node, error) {
 	return NodeStoreToNode(nodeStore)
 }
 
-func ListAllNodesByProvider(address string) ([]NodeStore, error) {
+// get node list of a cp
+func ListAllNodesByCp(cp string) ([]NodeStore, error) {
 	var nodeStores []NodeStore
-	err := GlobalDataBase.Model(&NodeStore{}).Where("address = ?", address).Find(&nodeStores).Error
+	err := GlobalDataBase.Model(&NodeStore{}).Where("address = ?", cp).Find(&nodeStores).Error
 	if err != nil {
 		return nil, err
 	}

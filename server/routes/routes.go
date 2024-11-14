@@ -43,7 +43,7 @@ func RegistRoutes() Routes {
 	r.registRootRoute()
 
 	// for functions
-	r.registProviderRoute()
+	r.registCpRoute()
 	r.registNodeRoute()
 	r.registOrderRoute()
 
@@ -57,20 +57,25 @@ func (r Routes) registRootRoute() {
 	})
 }
 
-// provider info in platform
-func (r Routes) registProviderRoute() {
-	r.GET("/v1/provider/:address/info", GetProviderInfoHandler())
-	r.GET("/v1/provider/list", ListProviderHandler())
+// cp info in platform
+func (r Routes) registCpRoute() {
+	r.GET("/v1/cp/:cp", GetCpInfoHandler())
+	r.GET("/v1/cp/list", ListCpHandler())
 }
 
 // node info in platform
 func (r Routes) registNodeRoute() {
-	r.GET("/v1/node/:id/info", GetNodeInfoHandler())
+	// id = cp:id
+	r.GET("/v1/node/:id", GetNodeHandler())
 	r.GET("/v1/node/list", ListNodeHandler())
 }
 
 // order operation in platform
 func (r Routes) registOrderRoute() {
+	r.GET("/v1/order/:id", GetOrderHandler())
+	r.GET("/v1/orders/:user", GetOrdersHandler())
+	r.GET("/v1/pros/:user", GetProsHandler())
+
 	r.GET("/v1/user/:address/order/list", ListActivedOrderHandler())
 	r.GET("/v1/user/:address/provider/list", ListOrderedProviderHandler())
 }
