@@ -17,6 +17,7 @@ func InitOrder() error {
 	return GlobalDataBase.AutoMigrate(&Order{})
 }
 
+// store order info to db
 func (o *Order) CreateOrder() error {
 	o.StartTime = o.ActivateTime.Add(time.Duration(o.Probation) * time.Second)
 	o.EndTime = o.StartTime.Add(time.Duration(o.Duration) * time.Second)

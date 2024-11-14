@@ -1,140 +1,66 @@
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"daemon","caller":"cmd/daemon.go:59","msg":"server endpoint:0.0.0.0:8002"}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"daemon","caller":"cmd/daemon.go:76","msg":"chain selected:local, chain endpoint:HTTP://127.0.0.1:7545\n"}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"daemon","caller":"cmd/daemon.go:77","msg":"contract addresses:%!(EXTRA contracts.Contracts={v0.5.4 0x3626b6ED823148C122614684f73c13E06d3872fF 0x85F1d4e75785974244BE1306bcDa1757c5F7049c   0x32f0a452d9392ef3ad55cC7d76640AB26c7079AC 0x3bBaFC2CEe98D81F3e79B042fFD934306f564E08 0xF9BFbba8c9120ec7d684378A23b0212778043E32  0xA9B707063E8BdF0Dce3cF356cBc7134F032dDE19  })"}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"daemon","caller":"cmd/daemon.go:86","msg":"init db.."}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"database","caller":"database/init.go:30","msg":"db path: ./grid"}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"database","caller":"database/init.go:75","msg":"init database success"}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"daemon","caller":"cmd/daemon.go:96","msg":"init dumper.."}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"daemon","caller":"cmd/daemon.go:97","msg":"local0xA9B707063E8BdF0Dce3cF356cBc7134F032dDE19 0x32f0a452d9392ef3ad55cC7d76640AB26c7079AC"}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"dumper","caller":"dumper/dumper.go:100","msg":"getting block number from db"}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"dumper","caller":"dumper/dumper.go:106","msg":"block number: 3043"}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"daemon","caller":"cmd/daemon.go:104","msg":"first dump.."}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"daemon","caller":"cmd/daemon.go:111","msg":"sync db with block chain.."}
-2024/11/13 18:14:38 Server Start
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"daemon","caller":"cmd/daemon.go:119","msg":"start listen.."}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:14:38+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:14:48+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:14:48+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:14:58+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:14:58+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:15:08+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:15:08+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:15:18+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:15:18+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:15:28+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:15:28+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:15:38+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:15:38+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:15:48+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:15:48+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:15:58+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:15:58+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:16:08+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:16:08+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:16:18+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:16:18+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:16:28+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:16:28+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:16:38+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:16:38+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:16:48+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:16:48+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:16:58+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:16:58+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:17:08+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:17:08+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:17:18+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:17:18+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:17:28+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:17:28+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:17:38+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:17:38+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:17:48+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:17:48+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:17:58+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:17:58+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:18:08+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:18:08+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:18:18+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:18:18+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:18:28+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:18:28+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:18:38+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:18:38+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:18:48+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:18:48+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:18:58+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:18:58+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:19:08+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:19:08+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:19:18+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:19:18+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:19:28+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:19:28+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:19:38+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:19:38+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:19:48+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:19:48+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:19:58+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:19:58+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:20:08+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:20:08+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:20:18+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:20:18+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:20:28+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:20:28+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:20:38+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:20:38+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:20:48+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:20:48+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:20:58+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:20:58+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:21:08+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:21:08+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:21:18+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:21:18+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:21:28+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:21:28+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:21:38+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:21:38+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:21:48+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:21:48+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:21:58+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:21:58+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:22:08+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:22:08+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:22:18+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:22:18+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:22:28+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:22:28+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:22:38+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:22:38+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:22:48+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:22:48+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:22:58+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:22:58+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:23:08+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:23:08+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:23:18+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:23:18+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:23:28+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:23:28+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:23:38+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:23:39+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:23:49+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:23:49+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:23:59+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:23:59+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:24:09+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:24:09+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:24:19+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:24:19+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:24:29+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:24:29+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:24:39+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:24:39+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
-{"level":"INFO","time":"2024-11-13T18:24:49+08:00","sub":"dumper","caller":"dumper/dumper.go:137","msg":"dump from block: 3043"}
-{"level":"INFO","time":"2024-11-13T18:24:49+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"events number: 1"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"daemon","caller":"cmd/daemon.go:59","msg":"server endpoint:0.0.0.0:8002"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"daemon","caller":"cmd/daemon.go:76","msg":"chain selected:local, chain endpoint:HTTP://127.0.0.1:7545\n"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"daemon","caller":"cmd/daemon.go:77","msg":"contract addresses:%!(EXTRA contracts.Contracts={v0.5.4 0x3626b6ED823148C122614684f73c13E06d3872fF 0x85F1d4e75785974244BE1306bcDa1757c5F7049c   0x32f0a452d9392ef3ad55cC7d76640AB26c7079AC 0x3bBaFC2CEe98D81F3e79B042fFD934306f564E08 0xF9BFbba8c9120ec7d684378A23b0212778043E32  0xA9B707063E8BdF0Dce3cF356cBc7134F032dDE19  })"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"daemon","caller":"cmd/daemon.go:86","msg":"init db.."}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"database","caller":"database/init.go:30","msg":"db path: ./grid"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"database","caller":"database/init.go:34","msg":"make dir"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"database","caller":"database/init.go:75","msg":"init database success"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"daemon","caller":"cmd/daemon.go:96","msg":"init dumper.."}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"daemon","caller":"cmd/daemon.go:97","msg":"local0xA9B707063E8BdF0Dce3cF356cBc7134F032dDE19 0x32f0a452d9392ef3ad55cC7d76640AB26c7079AC"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:100","msg":"getting block number from db"}
+
+2024/11/14 10:46:34 [31;1m/Users/wy/work/grid/github/platform-v2/database/profit.go:105 [35;1mrecord not found
+[0m[33m[0.101ms] [34;1m[rows:0][0m SELECT * FROM `block_numbers` ORDER BY `block_numbers`.`key` LIMIT 1
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:105","msg":"block number: 0"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"daemon","caller":"cmd/daemon.go:105","msg":"first dump.."}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:141","msg":"current chain block: 3044"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:142","msg":"current from block: 0"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:150","msg":"dump from block: 0"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:175","msg":"==== Handle Register Event"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:230","msg":"log data: 000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000000036370310000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000d3132332e3132332e3132332e3000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a74657374646f6d61696e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000033132330000000000000000000000000000000000000000000000000000000000"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:231","msg":"log topics: [0xbcad472d7231fdffaa55ba15ec74019f8b786f398c9bc7ebc941bf7d1d06b6a0 0x000000000000000000000000ef95c72c836605203f7f66788e450af2a4141957]"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:234","msg":"topics in map: [{cp address true}]"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:237","msg":"parse data, event name: Register"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:242","msg":"unpack out(no topics):&{0x0000000000000000000000000000000000000000 cp1 123.123.123.0 testdomain 123}"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:245","msg":"parse topic"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:250","msg":"unpack out(with topics):&{0xEf95c72C836605203F7f66788E450Af2a4141957 cp1 123.123.123.0 testdomain 123}"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/register.go:37","msg":"store register.."}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:181","msg":"==== Handle Add Node Event"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:230","msg":"log data: 000000000000000000000000ef95c72c836605203f7f66788e450af2a41419570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000001e0000000000000000000000000000000000000000000000000000000000f73140000000000000000000000000000000000000000000000000000000000000000640000000000000000000000000000000000000000000000000000000000278d0000000000000000000000000000000000000000000000000000000000018b8200000000000000000000000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000000000000000000278d0000000000000000000000000000000000000000000000000000000000018b8200000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000026935000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f7314000000000000000000000000000000000000000000000000000000000000000064000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000075254583430383000000000000000000000000000000000000000000000000000"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:231","msg":"log topics: [0x05fce9c0ff4f4e302558de983c418f1fd6e8e3767730d9fa301f69e4500ecbdd]"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:234","msg":"topics in map: []"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:237","msg":"parse data, event name: AddNode"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:242","msg":"unpack out(no topics):&{0xEf95c72C836605203F7f66788E450Af2a4141957 0 {25920000 10 i5} {259200000 100 RTX4080} {259200000 100 2592000} {25920000 10 2592000}}"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:245","msg":"parse topic"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:250","msg":"unpack out(with topics):&{0xEf95c72C836605203F7f66788E450Af2a4141957 0 {25920000 10 i5} {259200000 100 RTX4080} {259200000 100 2592000} {25920000 10 2592000}}"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/addnode.go:69","msg":"store AddNode.."}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:181","msg":"==== Handle Add Node Event"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:230","msg":"log data: 000000000000000000000000ef95c72c836605203f7f66788e450af2a41419570000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000001e00000000000000000000000000000000000000000000000000000000000278d00000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000278d00000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000278d0000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000000269370000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000278d000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000075254583430393000000000000000000000000000000000000000000000000000"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:231","msg":"log topics: [0x05fce9c0ff4f4e302558de983c418f1fd6e8e3767730d9fa301f69e4500ecbdd]"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:234","msg":"topics in map: []"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:237","msg":"parse data, event name: AddNode"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:242","msg":"unpack out(no topics):&{0xEf95c72C836605203F7f66788E450Af2a4141957 1 {2592000 1 i7} {2592000 1 RTX4090} {2592000 1 1} {2592000 1 1}}"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:245","msg":"parse topic"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:250","msg":"unpack out(with topics):&{0xEf95c72C836605203F7f66788E450Af2a4141957 1 {2592000 1 i7} {2592000 1 RTX4090} {2592000 1 1} {2592000 1 1}}"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/addnode.go:69","msg":"store AddNode.."}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:187","msg":"==== Handle Create Order Event"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:230","msg":"log data: 00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000067347bbb0000000000000000000000000000000000000000000000000000000000000005000000000000000000000000000000000000000000000000000000000000000a"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:231","msg":"log topics: [0xc5d9d47e207abe045200591a81233c8e9f04af9fceb548c58796aa1b1bab1f49 0x0000000000000000000000000000000000000000000000000000000000000001 0x000000000000000000000000ef95c72c836605203f7f66788e450af2a4141957]"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:234","msg":"topics in map: [{id uint64 true} {cp address true}]"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:237","msg":"parse data, event name: CreateOrder"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:242","msg":"unpack out(no topics):&{0x0000000000000000000000000000000000000000 0 1 1731492795 5 10}"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:245","msg":"parse topic"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:250","msg":"unpack out(with topics):&{0xEf95c72C836605203F7f66788E450Af2a4141957 1 1 1731492795 5 10}"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/createorder.go:44","msg":"store create order.."}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"daemon","caller":"cmd/daemon.go:112","msg":"sync db with block chain.."}
+2024/11/14 10:46:34 Server Start
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"daemon","caller":"cmd/daemon.go:120","msg":"start listen.."}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:141","msg":"current chain block: 3044"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:142","msg":"current from block: 3045"}
+{"level":"INFO","time":"2024-11-14T10:46:34+08:00","sub":"dumper","caller":"dumper/dumper.go:146","msg":"no new chain block, waiting.."}
+{"level":"INFO","time":"2024-11-14T10:46:44+08:00","sub":"dumper","caller":"dumper/dumper.go:141","msg":"current chain block: 3044"}
+{"level":"INFO","time":"2024-11-14T10:46:44+08:00","sub":"dumper","caller":"dumper/dumper.go:142","msg":"current from block: 3045"}
+{"level":"INFO","time":"2024-11-14T10:46:44+08:00","sub":"dumper","caller":"dumper/dumper.go:146","msg":"no new chain block, waiting.."}
+{"level":"INFO","time":"2024-11-14T10:46:55+08:00","sub":"dumper","caller":"dumper/dumper.go:141","msg":"current chain block: 3044"}
+{"level":"INFO","time":"2024-11-14T10:46:55+08:00","sub":"dumper","caller":"dumper/dumper.go:142","msg":"current from block: 3045"}
+{"level":"INFO","time":"2024-11-14T10:46:55+08:00","sub":"dumper","caller":"dumper/dumper.go:146","msg":"no new chain block, waiting.."}

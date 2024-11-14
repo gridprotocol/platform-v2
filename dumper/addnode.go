@@ -50,8 +50,9 @@ func (d *Dumper) HandleAddNode(log types.Log) error {
 
 	// make node with data
 	nodeInfo := database.Node{
-		Address:  out.Cp.Hex(),
-		Id:       int(out.Id),
+		Address: out.Cp.Hex(),
+		Id:      int(out.Id),
+
 		CPUPrice: out.Cpu.CpuPriceSec,
 		CPUModel: out.Cpu.Model,
 

@@ -95,6 +95,7 @@ var runCmd = &cli.Command{
 
 		logger.Info("init dumper..")
 		logger.Info(chain, registryAddress, marketAddress)
+
 		// init dumper
 		dumper, err := dumper.NewGRIDDumper(chain, registryAddress, marketAddress)
 		if err != nil {
@@ -109,7 +110,7 @@ var runCmd = &cli.Command{
 
 		// sync chain for db
 		logger.Info("sync db with block chain..")
-		//go dumper.SubscribeGRID(ctx.Context)
+		go dumper.SubscribeGRID(ctx.Context)
 
 		// create http server with routes
 		srv := server.NewServer(opts)

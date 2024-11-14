@@ -29,7 +29,7 @@ type Dumper struct {
 	contractAddress []common.Address
 	// store           MapStore
 
-	blockNumber *big.Int
+	fromBlock *big.Int
 
 	eventNameMap map[common.Hash]string
 	indexedMap   map[common.Hash]abi.Arguments
@@ -102,11 +102,10 @@ func NewGRIDDumper(chain string, registerAddress, marketAddress common.Address) 
 	if err != nil {
 		blockNumber = 0
 	}
-
 	logger.Info("block number: ", blockNumber)
 
 	// set block number for dumper
-	dumper.blockNumber = big.NewInt(blockNumber)
+	dumper.fromBlock = big.NewInt(blockNumber)
 
 	return dumper, nil
 }
@@ -134,20 +133,32 @@ func (d *Dumper) DumpGRID() error {
 	}
 	defer client.Close()
 
-	logger.Info("dump from block: ", d.blockNumber)
+	// get current chain block number
+	chainBlock, err := client.BlockNumber(context.Background())
+	if err != nil {
+		return err
+	}
+
+	// if no new chain block, return
+	if d.fromBlock.Cmp(new(big.Int).SetUint64(chainBlock)) > 0 {
+		logger.Info("no new chain block, waiting..")
+		return nil
+	}
+
+	logger.Info("dump from block: ", d.fromBlock)
 
 	// filter event logs from block
 	events, err := client.FilterLogs(context.TODO(), ethereum.FilterQuery{
-		FromBlock: d.blockNumber,
+		FromBlock: d.fromBlock,
 		Addresses: d.contractAddress,
 	})
 	if err != nil {
 		logger.Debug(err.Error())
 		return err
 	}
-	lastBlockNumber := d.blockNumber
 
-	logger.Info("events number: ", len(events))
+	// record block
+	lastBlock := d.fromBlock
 
 	// parse each event
 	for _, event := range events {
@@ -163,51 +174,45 @@ func (d *Dumper) DumpGRID() error {
 			err = d.HandleRegister(event)
 			if err != nil {
 				logger.Debug("handle register error: ", err.Error())
-				return err
 			}
 		case "AddNode":
 			logger.Info("==== Handle Add Node Event")
 			err = d.HandleAddNode(event)
 			if err != nil {
 				logger.Debug("handle addNode error: ", err.Error())
-				return err
 			}
-		case "CreateOrderEvent":
+		case "CreateOrder":
 			logger.Info("==== Handle Create Order Event")
 			tx, _, err := client.TransactionByHash(context.TODO(), event.TxHash)
 			if err != nil {
 				logger.Debug("handle create order error: ", err.Error())
-				return err
 			}
 
-			// user address
+			// get user address
 			address, err := types.LatestSignerForChainID(tx.ChainId()).Sender(tx)
 			if err != nil {
 				logger.Debug(err.Error())
 				return err
 			}
 
+			// store order info
 			err = d.HandleCreateOrder(event, address)
 			if err != nil {
 				logger.Debug(err.Error())
-				return err
 			}
 		default:
 			continue
 		}
 
-		// logger.Info("event block number: ", event.BlockNumber)
-		// logger.Info("block number in dumper: ", d.blockNumber.Uint64())
-
-		// update dumper's block number
-		if event.BlockNumber >= d.blockNumber.Uint64() {
-			d.blockNumber = big.NewInt(int64(event.BlockNumber) + 1)
+		// start from next block
+		if event.BlockNumber >= d.fromBlock.Uint64() {
+			d.fromBlock = big.NewInt(int64(event.BlockNumber) + 1)
 		}
 	}
 
-	// record block number in db
-	if d.blockNumber.Cmp(lastBlockNumber) == 1 {
-		database.SetBlockNumber(d.blockNumber.Int64())
+	// update block in db
+	if d.fromBlock.Cmp(lastBlock) > 0 {
+		database.SetBlockNumber(d.fromBlock.Int64())
 	}
 
 	return nil
