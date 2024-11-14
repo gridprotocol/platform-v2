@@ -57,26 +57,28 @@ func (r Routes) registRootRoute() {
 	})
 }
 
-// cp info in platform
+// cp
 func (r Routes) registCpRoute() {
 	r.GET("/v1/cp/:cp", GetCpInfoHandler())
 	r.GET("/v1/cp/list", ListCpHandler())
 }
 
-// node info in platform
+// node
 func (r Routes) registNodeRoute() {
 	// id = cp:id
 	r.GET("/v1/node/:id", GetNodeHandler())
-	r.GET("/v1/node/list", ListNodeHandler())
+	// get node list of a cp
+	r.GET("/v1/node/list/:cp", ListNodeHandler())
 }
 
-// order operation in platform
+// order
 func (r Routes) registOrderRoute() {
-	r.GET("/v1/order/:id", GetOrderHandler())
-	r.GET("/v1/orders/:user", GetOrdersHandler())
-	r.GET("/v1/pros/:user", GetProsHandler())
+	r.GET("/v1/order/info/:id", GetOrderHandler())
+	r.GET("/v1/order/list/:user", GetOrdersHandler())
+	r.GET("/v1/order/fee/:id", FeeOrderHandler())
 
 	r.GET("/v1/user/:address/order/list", ListActivedOrderHandler())
+	// list providers of an user
 	r.GET("/v1/user/:address/provider/list", ListOrderedProviderHandler())
 }
 

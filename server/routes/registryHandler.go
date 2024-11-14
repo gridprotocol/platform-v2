@@ -1,11 +1,11 @@
 package routes
 
 import (
-	"strconv"
 	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gridprotocol/platform-v2/database"
+	"github.com/gridprotocol/platform-v2/lib/utils"
 	"github.com/gridprotocol/platform-v2/logs"
 	"golang.org/x/xerrors"
 )
@@ -92,15 +92,22 @@ func ListNodeHandler() gin.HandlerFunc {
 	}
 }
 
-func decodeNodeID(nodeID string) (string, int, error) {
+func decodeNodeID(nodeID string) (string, uint64, error) {
 	results := strings.Split(nodeID, ":")
+
 	if len(results) != 2 {
 		return "", 0, xerrors.Errorf("node id(%s) Format Error, it should be {address}:{id}", nodeID)
 	}
 
-	id, err := strconv.Atoi(results[1])
+	// id, err := strconv.Atoi(results[1])
+	// if err != nil {
+	// 	return "", 0, xerrors.Errorf("can't parse %s to int, %s", results[1], err.Error())
+	// }
+
+	// string to uint64
+	id, err := utils.StringToUint64(results[1])
 	if err != nil {
-		return "", 0, xerrors.Errorf("can't parse %s to int, %s", results[1], err.Error())
+		return "", 0, xerrors.Errorf("can't parse %s to uint64, %s", results[1], err.Error())
 	}
 
 	return results[0], id, nil

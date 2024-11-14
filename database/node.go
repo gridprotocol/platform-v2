@@ -8,7 +8,7 @@ import (
 
 type Node struct {
 	Address string
-	Id      int
+	Id      uint64
 
 	CPUPrice *big.Int
 	CPUModel string
@@ -25,7 +25,7 @@ type Node struct {
 
 type NodeStore struct {
 	Address string `gorm:"primaryKey"`
-	Id      int    `gorm:"primaryKey;autoIncrement:false"`
+	Id      uint64 `gorm:"primaryKey;autoIncrement:false"`
 
 	CPUPrice string
 	CPUModel string
@@ -54,7 +54,7 @@ func (n *Node) CreateNode() error {
 }
 
 // get node with cp and id
-func GetNodeByCpAndId(cp string, id int) (Node, error) {
+func GetNodeByCpAndId(cp string, id uint64) (Node, error) {
 	var nodeStore NodeStore
 	err := GlobalDataBase.Model(&NodeStore{}).Where("address = ? AND id = ?", cp, id).First(&nodeStore).Error
 	if err != nil {

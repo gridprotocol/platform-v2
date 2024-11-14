@@ -1,11 +1,15 @@
 package database
 
-import "time"
+import (
+	"math/big"
+	"time"
+)
 
 type Order struct {
+	Id           uint64 // order id
 	User         string
 	Provider     string
-	Id           int
+	Nid          uint64    // node id
 	ActivateTime time.Time `gorm:"column:activate"`
 	StartTime    time.Time `gorm:"column:start"`
 	EndTime      time.Time `gorm:"column:end"`
@@ -38,23 +42,13 @@ func GetOrderById(id uint64) (Order, error) {
 // get order list of an user
 func GetOrdersByUser(user string) ([]Order, error) {
 	var orders []Order
+
 	err := GlobalDataBase.Model(&Order{}).Where("user = ?", user).Find(&orders).Error
 	if err != nil {
 		return nil, err
 	}
 
 	return orders, nil
-}
-
-// get all provider address of an user
-func GetProsByUser(user string) ([]string, error) {
-	var pros []string
-	err := GlobalDataBase.Model(&Order{}).Select("provider").Where("user = ?", user).Find(&pros).Error
-	if err != nil {
-		return nil, err
-	}
-
-	return pros, nil
 }
 
 func ListAllActivedOrder() ([]Order, error) {
@@ -79,14 +73,44 @@ func ListAllActivedOrderByUser(address string) ([]Order, error) {
 	return orders, nil
 }
 
-func ListAllOrderedProvider(address string) ([]Provider, error) {
-	var now = time.Now()
+func ListAllOrderedProvider(user string) ([]Provider, error) {
+	//var now = time.Now()
 	var provider []Provider
-	err := GlobalDataBase.Model(&Order{}).Where("user = ? AND start < ? AND end > ?", address, now, now).
-		Joins("right join provider on order.provider = provider.addresss").Find(&provider).Error
+
+	//err := GlobalDataBase.Model(&Order{}).Where("user = ? AND start < ? AND end > ?", user, now, now).
+	err := GlobalDataBase.Model(&Order{}).Where("user = ?", user).
+		Joins("left join providers on orders.provider = providers.address").
+		Select("address, name, ip,domain,port").Find(&provider).Error
 	if err != nil {
 		return nil, err
 	}
 
 	return provider, nil
+}
+
+// calc the fee of an order by id
+func CalcOrderFee(id uint64) (*big.Int, error) {
+	// get order info by id
+	order, err := GetOrderById(id)
+	if err != nil {
+		return nil, err
+	}
+
+	// get node info by cp and nid
+	node, err := GetNodeByCpAndId(order.Provider, order.Nid)
+	if err != nil {
+		return nil, err
+	}
+
+	// calc order fee
+	memFeeSec := new(big.Int).Mul(new(big.Int).SetInt64(node.MemCapacity), node.MemPrice)
+	diskFeeSec := new(big.Int).Mul(new(big.Int).SetInt64(node.DiskCapacity), node.DiskPrice)
+
+	totalPrice := new(big.Int).Add(node.CPUPrice, node.GPUPrice)
+	totalPrice.Add(totalPrice, memFeeSec)
+	totalPrice.Add(totalPrice, diskFeeSec)
+	totalPrice.Mul(totalPrice, new(big.Int).SetInt64(order.Duration))
+
+	// return order fee
+	return totalPrice, nil
 }

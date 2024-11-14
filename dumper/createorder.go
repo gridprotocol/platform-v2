@@ -33,7 +33,7 @@ func (d *Dumper) HandleCreateOrder(log types.Log, from common.Address) error {
 	orderInfo := database.Order{
 		User:         from.Hex(),
 		Provider:     out.Cp.Hex(),
-		Id:           int(out.Id),
+		Id:           out.Id,
 		ActivateTime: time.Unix(out.Act.Int64(), 0),
 		StartTime:    time.Unix(startTime.Int64(), 0),
 		EndTime:      time.Unix(endTime.Int64(), 0),
