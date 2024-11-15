@@ -66,6 +66,7 @@ func ListAllActivedOrderByUser(address string) ([]Order, error) {
 	var now = time.Now()
 	var orders []Order
 	err := GlobalDataBase.Model(&Order{}).Where("user = ? AND start < ? AND end > ?", address, now, now).Find(&orders).Error
+	//err := GlobalDataBase.Model(&Order{}).Where("user = ?", address).Find(&orders).Error
 	if err != nil {
 		return nil, err
 	}
@@ -74,11 +75,11 @@ func ListAllActivedOrderByUser(address string) ([]Order, error) {
 }
 
 func ListAllOrderedProvider(user string) ([]Provider, error) {
-	//var now = time.Now()
+	var now = time.Now()
 	var provider []Provider
 
-	//err := GlobalDataBase.Model(&Order{}).Where("user = ? AND start < ? AND end > ?", user, now, now).
-	err := GlobalDataBase.Model(&Order{}).Where("user = ?", user).
+	err := GlobalDataBase.Model(&Order{}).Where("user = ? AND start < ? AND end > ?", user, now, now).
+		//err := GlobalDataBase.Model(&Order{}).Where("user = ?", user).
 		Joins("left join providers on orders.provider = providers.address").
 		Select("address, name, ip,domain,port").Find(&provider).Error
 	if err != nil {
@@ -101,6 +102,8 @@ func CalcOrderFee(id uint64) (*big.Int, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	logger.Debug("node: ", node)
 
 	// calc order fee
 	memFeeSec := new(big.Int).Mul(new(big.Int).SetInt64(node.MemCapacity), node.MemPrice)

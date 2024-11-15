@@ -27,9 +27,10 @@ func GetProviderByAddress(address string) (Provider, error) {
 	return provider, nil
 }
 
-func ListAllProviders() ([]Provider, error) {
+func ListAllProviders(start int, num int) ([]Provider, error) {
 	var providers []Provider
-	err := GlobalDataBase.Model(&Provider{}).Find(&providers).Error
+
+	err := GlobalDataBase.Model(&Provider{}).Limit(num).Offset(start).Find(&providers).Error
 	if err != nil {
 		return nil, err
 	}

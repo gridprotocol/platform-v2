@@ -41,7 +41,7 @@ func GetOrdersHandler() gin.HandlerFunc {
 
 func ListActivedOrderHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		user := c.Param("user")
+		user := c.Param("address")
 		orders, err := database.ListAllActivedOrderByUser(user)
 		if err != nil {
 			logger.Error(err.Error())

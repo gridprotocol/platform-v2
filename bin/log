@@ -1,23 +1,42 @@
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"daemon","caller":"cmd/daemon.go:59","msg":"server endpoint:0.0.0.0:8002"}
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"daemon","caller":"cmd/daemon.go:76","msg":"chain selected:local, chain endpoint:HTTP://127.0.0.1:7545\n"}
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"daemon","caller":"cmd/daemon.go:77","msg":"contract addresses:%!(EXTRA contracts.Contracts={v0.5.4 0x3626b6ED823148C122614684f73c13E06d3872fF 0x85F1d4e75785974244BE1306bcDa1757c5F7049c   0x32f0a452d9392ef3ad55cC7d76640AB26c7079AC 0x3bBaFC2CEe98D81F3e79B042fFD934306f564E08 0xF9BFbba8c9120ec7d684378A23b0212778043E32  0xA9B707063E8BdF0Dce3cF356cBc7134F032dDE19  })"}
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"daemon","caller":"cmd/daemon.go:86","msg":"init db.."}
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"database","caller":"database/init.go:30","msg":"db path: ./grid"}
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"database","caller":"database/init.go:75","msg":"init database success"}
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"daemon","caller":"cmd/daemon.go:96","msg":"init dumper.."}
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"daemon","caller":"cmd/daemon.go:97","msg":"local0xA9B707063E8BdF0Dce3cF356cBc7134F032dDE19 0x32f0a452d9392ef3ad55cC7d76640AB26c7079AC"}
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"dumper","caller":"dumper/dumper.go:100","msg":"getting block number from db"}
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"dumper","caller":"dumper/dumper.go:105","msg":"block number: 3045"}
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"daemon","caller":"cmd/daemon.go:105","msg":"first dump.."}
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"daemon","caller":"cmd/daemon.go:112","msg":"sync db with block chain.."}
-2024/11/14 18:19:22 Server Start
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"daemon","caller":"cmd/daemon.go:120","msg":"start listen.."}
-{"level":"INFO","time":"2024-11-14T18:19:22+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
-[GIN] 2024/11/14 - 18:19:27 | 200 |    1.669042ms |             ::1 | GET      "/v1/user/0x82379862a857C98aB391Fa7F66957AfDE97EF528/provider/list"
-{"level":"INFO","time":"2024-11-14T18:19:32+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
-{"level":"INFO","time":"2024-11-14T18:19:42+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
-{"level":"INFO","time":"2024-11-14T18:19:52+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
-{"level":"INFO","time":"2024-11-14T18:20:02+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
-{"level":"INFO","time":"2024-11-14T18:20:12+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
-{"level":"INFO","time":"2024-11-14T18:20:22+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"daemon","caller":"cmd/daemon.go:59","msg":"server endpoint:0.0.0.0:8002"}
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"daemon","caller":"cmd/daemon.go:76","msg":"chain selected:local, chain endpoint:HTTP://127.0.0.1:7545\n"}
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"daemon","caller":"cmd/daemon.go:77","msg":"contract addresses:%!(EXTRA contracts.Contracts={v0.5.4 0x31C191e59eDbD80Dcb77C4f9b9dDbdB24b55cD81 0x45cFeC5552Dae2c8b22cCB02d0Dc31D6e9658A2A   0xAdEe67007bebBC35869d539d92cAD3CBb5e54E12 0x377c4dBeF17c7aF998081BCBA57dc4eFEa0AA576 0xa5Bc8Eb385d64d8664F64051ED23f5d09803462c  0xD34e3c1Ed758837D262E2896D848ec9B09599F3B  })"}
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"daemon","caller":"cmd/daemon.go:86","msg":"init db.."}
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"database","caller":"database/init.go:30","msg":"db path: ./grid"}
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"database","caller":"database/init.go:75","msg":"init database success"}
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"daemon","caller":"cmd/daemon.go:96","msg":"init dumper.."}
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"daemon","caller":"cmd/daemon.go:97","msg":"local0xD34e3c1Ed758837D262E2896D848ec9B09599F3B 0xAdEe67007bebBC35869d539d92cAD3CBb5e54E12"}
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"dumper","caller":"dumper/dumper.go:100","msg":"getting block number from db"}
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"dumper","caller":"dumper/dumper.go:105","msg":"block number: 3066"}
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"daemon","caller":"cmd/daemon.go:105","msg":"first dump.."}
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"daemon","caller":"cmd/daemon.go:112","msg":"sync db with block chain.."}
+2024/11/15 10:43:49 Server Start
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"daemon","caller":"cmd/daemon.go:120","msg":"start listen.."}
+{"level":"INFO","time":"2024-11-15T10:43:49+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+{"level":"INFO","time":"2024-11-15T10:43:59+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+[GIN] 2024/11/15 - 10:44:02 | 404 |        2.25µs |             ::1 | GET      "/v1/cp/0xEf95c72C836605203F7f66788E450Af2a4141957/0/1"
+{"level":"INFO","time":"2024-11-15T10:44:09+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+{"level":"INFO","time":"2024-11-15T10:44:19+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+{"level":"INFO","time":"2024-11-15T10:44:29+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+{"level":"INFO","time":"2024-11-15T10:44:39+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+[GIN] 2024/11/15 - 10:44:43 | 200 |    2.891958ms |             ::1 | GET      "/v1/cp/0xEf95c72C836605203F7f66788E450Af2a4141957"
+{"level":"INFO","time":"2024-11-15T10:44:49+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+
+2024/11/15 10:44:52 [31;1m/Users/wy/work/grid/github/platform-v2/database/provider.go:22 [35;1mrecord not found
+[0m[33m[0.325ms] [34;1m[rows:0][0m SELECT * FROM `providers` WHERE address = "list" ORDER BY `providers`.`address` LIMIT 1
+{"level":"ERROR","time":"2024-11-15T10:44:52+08:00","sub":"routes","caller":"routes/registryHandler.go:25","msg":"record not found"}
+[GIN] 2024/11/15 - 10:44:52 | 400 |     585.875µs |             ::1 | GET      "/v1/cp/list"
+[GIN] 2024/11/15 - 10:44:56 | 200 |     351.833µs |             ::1 | GET      "/v1/cp/list/0/1"
+[GIN] 2024/11/15 - 10:44:59 | 200 |     242.125µs |             ::1 | GET      "/v1/cp/list/0/2"
+{"level":"INFO","time":"2024-11-15T10:44:59+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+[GIN] 2024/11/15 - 10:45:02 | 200 |         428µs |             ::1 | GET      "/v1/cp/list/1/2"
+[GIN] 2024/11/15 - 10:45:08 | 200 |     297.834µs |             ::1 | GET      "/v1/cp/list/0/1"
+{"level":"INFO","time":"2024-11-15T10:45:09+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+{"level":"DEBUG","time":"2024-11-15T10:45:19+08:00","sub":"database","caller":"database/order.go:106","msg":"node: {0xEf95c72C836605203F7f66788E450Af2a4141957 1 1 i7 1 RTX4090 1 1 1 1}"}
+[GIN] 2024/11/15 - 10:45:19 | 200 |    2.100708ms |             ::1 | GET      "/v1/order/fee/1"
+{"level":"INFO","time":"2024-11-15T10:45:19+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+{"level":"INFO","time":"2024-11-15T10:45:29+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+{"level":"INFO","time":"2024-11-15T10:45:39+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+{"level":"INFO","time":"2024-11-15T10:45:49+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}
+{"level":"INFO","time":"2024-11-15T10:45:59+08:00","sub":"dumper","caller":"dumper/dumper.go:144","msg":"no new chain block, waiting.."}

@@ -34,6 +34,7 @@ func (d *Dumper) HandleCreateOrder(log types.Log, from common.Address) error {
 		User:         from.Hex(),
 		Provider:     out.Cp.Hex(),
 		Id:           out.Id,
+		Nid:          out.Nid,
 		ActivateTime: time.Unix(out.Act.Int64(), 0),
 		StartTime:    time.Unix(startTime.Int64(), 0),
 		EndTime:      time.Unix(endTime.Int64(), 0),

@@ -34,7 +34,13 @@ func GetCpInfoHandler() gin.HandlerFunc {
 // list all cp
 func ListCpHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		providers, err := database.ListAllProviders()
+		start := c.Param("start")
+		num := c.Param("num")
+
+		iStart, _ := utils.StringToInt64(start)
+		iNum, _ := utils.StringToInt64(num)
+
+		providers, err := database.ListAllProviders(int(iStart), int(iNum))
 		if err != nil {
 			logger.Error(err.Error())
 			c.AbortWithStatusJSON(500, err.Error())
