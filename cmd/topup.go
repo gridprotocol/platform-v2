@@ -98,7 +98,7 @@ var TopupCmd = &cli.Command{
 			return err
 		}
 
-		fmt.Println("transfer ok")
+		fmt.Println("transfer credit ok")
 
 		return nil
 	},
