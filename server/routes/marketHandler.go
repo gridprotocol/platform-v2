@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/gridprotocol/platform-v2/database"
+	"github.com/gridprotocol/dumper/database"
 	"github.com/gridprotocol/platform-v2/lib/utils"
 )
 

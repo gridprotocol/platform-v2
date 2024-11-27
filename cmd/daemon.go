@@ -15,9 +15,9 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/grid/contracts/eth"
+	"github.com/gridprotocol/dumper/database"
+	"github.com/gridprotocol/dumper/dumper"
 	comm "github.com/gridprotocol/platform-v2/common"
-	"github.com/gridprotocol/platform-v2/database"
-	"github.com/gridprotocol/platform-v2/dumper"
 	"github.com/gridprotocol/platform-v2/lib/config"
 	"github.com/gridprotocol/platform-v2/logs"
 	"github.com/gridprotocol/platform-v2/server"

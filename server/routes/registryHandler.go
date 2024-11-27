@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/gridprotocol/platform-v2/database"
+	"github.com/gridprotocol/dumper/database"
 	"github.com/gridprotocol/platform-v2/lib/utils"
 	"github.com/gridprotocol/platform-v2/logs"
 	"golang.org/x/xerrors"
