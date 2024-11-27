@@ -11,7 +11,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-// admin topup some credit for an user to create orders
+// admin topup some gtoken for an user to create orders
 var Topup2Cmd = &cli.Command{
 	Name:  "topup2",
 	Usage: "topup gtoken",
