@@ -6,13 +6,15 @@ toolchain go1.22.3
 
 replace github.com/grid/contracts => ../grid-contracts
 
+replace github.com/gridprotocol/dumper => ../dumper
+
 require (
 	github.com/BurntSushi/toml v1.3.2
 	github.com/dgraph-io/badger/v2 v2.2007.4
 	github.com/ethereum/go-ethereum v1.14.12
 	github.com/gin-gonic/gin v1.9.1
 	github.com/grid/contracts v0.0.0-00010101000000-000000000000
-	github.com/gridprotocol/dumper v0.0.0-20241202035453-814bc6dd6ff1
+	//github.com/gridprotocol/dumper v0.0.0-20241202035453-814bc6dd6ff1
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/pkg/errors v0.9.1
 	github.com/urfave/cli/v2 v2.25.7
@@ -20,6 +22,8 @@ require (
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 )
+
+require github.com/gridprotocol/dumper v0.0.0-00010101000000-000000000000
 
 require (
 	github.com/Microsoft/go-winio v0.6.2 // indirect
