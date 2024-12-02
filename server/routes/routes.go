@@ -81,6 +81,9 @@ func (r Routes) registOrderRoute() {
 	r.GET("/v1/user/:address/order/list", ListActivedOrderHandler())
 	// list providers of an user
 	r.GET("/v1/user/:address/provider/list", ListOrderedProviderHandler())
+
+	// get order count of a provider
+	r.GET("/v1/provider/:address/count", GetOrderCountHandler())
 }
 
 func cors() gin.HandlerFunc {

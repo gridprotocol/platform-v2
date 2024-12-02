@@ -12,7 +12,7 @@ require (
 	github.com/ethereum/go-ethereum v1.14.12
 	github.com/gin-gonic/gin v1.9.1
 	github.com/grid/contracts v0.0.0-00010101000000-000000000000
-	github.com/gridprotocol/dumper v0.0.0-20241127083900-1115418407fc
+	github.com/gridprotocol/dumper v0.0.0-20241202035453-814bc6dd6ff1
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/pkg/errors v0.9.1
 	github.com/urfave/cli/v2 v2.25.7

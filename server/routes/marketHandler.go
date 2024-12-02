@@ -69,6 +69,22 @@ func ListOrderedProviderHandler() gin.HandlerFunc {
 	}
 }
 
+// get order count of a provider
+func GetOrderCountHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// provider address
+		address := c.Param("address")
+		cnt, err := database.GetOrderCount(address)
+		if err != nil {
+			logger.Error(err.Error())
+			c.AbortWithStatusJSON(500, err.Error())
+			return
+		}
+
+		c.JSON(200, cnt)
+	}
+}
+
 // get the fee of an order
 func FeeOrderHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
