@@ -97,7 +97,7 @@ var runCmd = &cli.Command{
 		logger.Info(chain, registryAddress, marketAddress)
 
 		// init dumper
-		dumper, err := dumper.NewGRIDDumper(getEndpointByChain(chain), registryAddress, marketAddress)
+		dumper, err := dumper.NewGRIDDumper(chain_ep, registryAddress, marketAddress)
 		if err != nil {
 			return err
 		}
@@ -172,20 +172,20 @@ func kill(pid string) error {
 	}
 }
 
-func getEndpointByChain(chain string) string {
-	switch chain {
-	case "local":
-		return eth.Ganache
-	case "dev":
-		return "https://devchain.metamemo.one:8501"
-		//return "http://10.10.100.82:8201"
+// func getEndpointByChain(chain string) string {
+// 	switch chain {
+// 	case "local":
+// 		return eth.Ganache
+// 	case "dev":
+// 		return "https://devchain.metamemo.one:8501"
+// 		//return "http://10.10.100.82:8201"
 
-		// case "test":
-		// 	return "https://testchain.metamemo.one:24180"
-		// case "product":
-		// 	return "https://chain.metamemo.one:8501"
-		// case "goerli":
-		// 	return "https://eth-goerli.g.alchemy.com/v2/Bn3AbuwyuTWanFLJiflS-dc23r1Re_Af"
-	}
-	return "https://devchain.metamemo.one:8501"
-}
+// 		// case "test":
+// 		// 	return "https://testchain.metamemo.one:24180"
+// 		// case "product":
+// 		// 	return "https://chain.metamemo.one:8501"
+// 		// case "goerli":
+// 		// 	return "https://eth-goerli.g.alchemy.com/v2/Bn3AbuwyuTWanFLJiflS-dc23r1Re_Af"
+// 	}
+// 	return "https://devchain.metamemo.one:8501"
+// }
