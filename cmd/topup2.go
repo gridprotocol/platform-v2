@@ -59,7 +59,7 @@ var Topup2Cmd = &cli.Command{
 		}
 
 		// get credit contract address
-		tokenAddr := comm.Contracts.Token
+		tokenAddr := comm.Contracts.GToken
 
 		// connect to chain
 		backend, chainID := eth.ConnETH(ep)
