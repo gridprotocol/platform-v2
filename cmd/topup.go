@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/grid/contracts/eth"
 	"github.com/grid/contracts/go/credit"
@@ -73,6 +74,12 @@ var TopupCmd = &cli.Command{
 		if err != nil {
 			fmt.Println("new credit instance failed:", err)
 		}
+
+		b, err := creditIns.BalanceOf(&bind.CallOpts{}, eth.Addr0)
+		if err != nil {
+			return err
+		}
+		fmt.Println("credit balance of admin:", b.String())
 
 		// make auth to sign and send tx
 		authAdmin, err := eth.MakeAuth(chainID, eth.SK0)
