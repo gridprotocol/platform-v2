@@ -43,7 +43,7 @@ var runCmd = &cli.Command{
 	Flags: []cli.Flag{
 		&cli.StringFlag{
 			Name:  "chain",
-			Usage: "input chain name, e.g.(dev)",
+			Usage: "input chain name, e.g.(dev,test)",
 			Value: "dev",
 		},
 	},
@@ -68,6 +68,9 @@ var runCmd = &cli.Command{
 		case "dev":
 			chain_ep = eth.DevChain
 			comm.Contracts = comm.DevContracts.Contracts
+		case "test":
+			chain_ep = eth.TestChain
+			comm.Contracts = comm.TestContracts.Contracts
 		case "sepo":
 			chain_ep = eth.Sepolia
 			comm.Contracts = comm.SepoContracts.Contracts
