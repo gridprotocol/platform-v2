@@ -51,6 +51,26 @@ func ListCpHandler() gin.HandlerFunc {
 	}
 }
 
+// list all nodes by specify node start and num
+func ListNodeHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		start := c.Param("start")
+		num := c.Param("num")
+
+		iStart, _ := utils.StringToInt64(start)
+		iNum, _ := utils.StringToInt64(num)
+
+		providers, err := database.ListAllNodes(int(iStart), int(iNum))
+		if err != nil {
+			logger.Error(err.Error())
+			c.AbortWithStatusJSON(500, err.Error())
+			return
+		}
+
+		c.JSON(200, providers)
+	}
+}
+
 // get node, nodeID = cp:id
 func GetNodeHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -76,18 +96,33 @@ func GetNodeHandler() gin.HandlerFunc {
 }
 
 // get node list of a cp
-func ListNodeHandler() gin.HandlerFunc {
+func CpNodeHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		cp := c.Query("cp")
 
 		var nodes []database.NodeStore
 		var err error
-		if cp == "" {
-			nodes, err = database.ListAllNodes()
-		} else {
-			nodes, err = database.ListAllNodesByCp(cp)
+
+		nodes, err = database.ListAllNodesByCp(cp)
+		if err != nil {
+			logger.Error(err.Error())
+			c.AbortWithStatusJSON(500, err.Error())
+			return
 		}
 
+		c.JSON(200, nodes)
+	}
+}
+
+// get node list by an user
+func ListUserNodesHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		user := c.Param("user")
+
+		var nodes []database.NodeStore
+		var err error
+
+		nodes, err = database.ListAllNodesByUser(user)
 		if err != nil {
 			logger.Error(err.Error())
 			c.AbortWithStatusJSON(500, err.Error())

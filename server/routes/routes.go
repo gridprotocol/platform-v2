@@ -59,26 +59,42 @@ func (r Routes) registRootRoute() {
 
 // cp
 func (r Routes) registCpRoute() {
+	// get a cp info by address
 	r.GET("/v1/cp/:cp", GetCpInfoHandler())
+
+	// get cp list by start and num
 	r.GET("/v1/cp/list/:start/:num", ListCpHandler())
 
 	// get node list of a cp
-	r.GET("/v1/cp/:cp/node/list", ListNodeHandler())
+	r.GET("/v1/cp/:cp/node/list", CpNodeHandler())
 }
 
 // node
 func (r Routes) registNodeRoute() {
+	// get all nodelist by node start and num
+	r.GET("/v1/node/list/:start/:num", ListNodeHandler())
+
+	// get nodelist of a user
+	r.GET("/v1/user/node/list/:user", ListUserNodesHandler())
+
+	//todo: node statics, currently get from contracts
+
 	// id = cp:id
 	r.GET("/v1/node/:id", GetNodeHandler())
 }
 
 // order
 func (r Routes) registOrderRoute() {
+	// order by id
 	r.GET("/v1/order/:id/info", GetOrderHandler())
+
 	//r.GET("/v1/order/list/:user", GetOrdersHandler())
+	// order fee by id
 	r.GET("/v1/order/fee/:id", FeeOrderHandler())
 
+	// orders of an user
 	r.GET("/v1/user/:address/order/list", ListActivedOrderHandler())
+
 	// list providers of an user
 	r.GET("/v1/user/:address/provider/list", ListOrderedProviderHandler())
 
