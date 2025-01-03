@@ -85,9 +85,9 @@ var runCmd = &cli.Command{
 			Chain_Endpoint: chain_ep,
 		}
 
-		// init db
-		logger.Info("init db..")
-		err = database.InitDatabase("./grid")
+		// init dumper db
+		logger.Info("init dumper db..")
+		err = database.InitDatabase("./dumper_db")
 		if err != nil {
 			return err
 		}
