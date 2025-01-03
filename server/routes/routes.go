@@ -59,6 +59,9 @@ func (r Routes) registRootRoute() {
 
 // cp
 func (r Routes) registCpRoute() {
+	// register cp
+	r.GET("/v1/registercp", RegCPHandler())
+
 	r.GET("/v1/cp/:cp", GetCpInfoHandler())
 	r.GET("/v1/cp/list/:start/:num", ListCpHandler())
 

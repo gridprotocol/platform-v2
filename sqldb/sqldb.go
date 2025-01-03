@@ -8,6 +8,8 @@ import (
 	_ "github.com/mattn/go-sqlite3" // 导入SQLite驱动
 )
 
+var GRID_DB *sql.DB
+
 func init() {
 	fmt.Println("create grid db")
 
@@ -16,12 +18,13 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer db.Close()
+	GRID_DB = db
+	//defer db.Close()
 
 	// create providers table
 	createTableSQL := `CREATE TABLE IF NOT EXISTS providers (
         "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
-        "address" TEXT,
+        "address" TEXT UNIQUE,
         "name" TEXT,
 		"ip" TEXT,
 		"port" TEXT,
@@ -73,4 +76,5 @@ func init() {
 	}
 
 	log.Println("orders table created")
+
 }
