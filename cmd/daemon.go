@@ -86,8 +86,8 @@ var runCmd = &cli.Command{
 		}
 
 		// init db
-		logger.Info("init db..")
-		err = database.InitDatabase("./grid")
+		logger.Info("init dumper db..")
+		err = database.InitDatabase("./dumper_db")
 		if err != nil {
 			return err
 		}

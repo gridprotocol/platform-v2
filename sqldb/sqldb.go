@@ -2,12 +2,15 @@ package sqldb
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 )
 
 func init() {
+	fmt.Println("create grid db")
+
 	// create db
-	db, err := sql.Open("sqlite3", "./grid.db")
+	db, err := sql.Open("sqlite3", "./grid_db/grid.db")
 	if err != nil {
 		log.Fatal(err)
 	}
