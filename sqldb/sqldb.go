@@ -30,7 +30,7 @@ func init() {
 
 	log.Println("providers table created")
 
-	// creaet nodes table
+	// create nodes table
 	createTableSQL = `CREATE TABLE IF NOT EXISTS nodes (
         "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
         "provider" TEXT,
