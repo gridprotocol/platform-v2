@@ -93,7 +93,7 @@ func (r Routes) registOrderRoute() {
 	r.GET("/v1/order/fee/:id", FeeOrderHandler())
 
 	// orders of an user
-	r.GET("/v1/user/:address/order/list", ListActivedOrderHandler())
+	r.GET("/v1/user/:address/order/list", ListUserOrderHandler())
 
 	// list providers of an user
 	r.GET("/v1/user/:address/provider/list", ListOrderedProviderHandler())
