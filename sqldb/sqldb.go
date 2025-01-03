@@ -6,14 +6,14 @@ import (
 )
 
 func init() {
-	// 创建或打开数据库
-	db, err := sql.Open("sqlite3", "./example.db")
+	// create db
+	db, err := sql.Open("sqlite3", "./grid.db")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
 
-	// 创建provider表
+	// create providers table
 	createTableSQL := `CREATE TABLE IF NOT EXISTS providers (
         "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
         "address" TEXT,
@@ -28,9 +28,9 @@ func init() {
 		log.Fatal(err)
 	}
 
-	log.Println("provider表创建成功")
+	log.Println("providers table created")
 
-	// 创建nodes表
+	// creaet nodes table
 	createTableSQL = `CREATE TABLE IF NOT EXISTS nodes (
         "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
         "provider" TEXT,
@@ -48,9 +48,9 @@ func init() {
 		log.Fatal(err)
 	}
 
-	log.Println("nodes表创建成功")
+	log.Println("nodes table created")
 
-	// 创建orders表
+	// create orders table
 	createTableSQL = `CREATE TABLE IF NOT EXISTS orders (
         "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
         "user" TEXT,
@@ -67,5 +67,5 @@ func init() {
 		log.Fatal(err)
 	}
 
-	log.Println("orders表创建成功")
+	log.Println("orders table created")
 }
