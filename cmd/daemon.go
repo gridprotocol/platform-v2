@@ -21,6 +21,7 @@ import (
 	"github.com/gridprotocol/platform-v2/lib/config"
 	"github.com/gridprotocol/platform-v2/logs"
 	"github.com/gridprotocol/platform-v2/server"
+	_ "github.com/gridprotocol/platform-v2/sqldb"
 	"github.com/mitchellh/go-homedir"
 	"github.com/urfave/cli/v2"
 )
