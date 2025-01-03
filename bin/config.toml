@@ -2,7 +2,7 @@
 Listen = "0.0.0.0:8002"
 
 [Local]
-DB_Path = "./db"
+DB_Path = "./kvdb"
 
 [Remote]
 Wallet = "0x123456"
