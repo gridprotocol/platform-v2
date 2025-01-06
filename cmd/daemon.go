@@ -108,6 +108,7 @@ var runCmd = &cli.Command{
 		logger.Info("first dump..")
 		err = dumper.DumpGRID()
 		if err != nil {
+			logger.Debug("dump error:", err)
 			return err
 		}
 

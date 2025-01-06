@@ -1,0 +1,39 @@
+basePath: /
+host: localhost:8002
+info:
+  contact: {}
+  description: This is the grid platform
+  title: PLATFORM-v2 API
+  version: "1.0"
+paths:
+  /listnodes/:
+    get:
+      consumes:
+      - application/json
+      description: list all nodes
+      parameters:
+      - description: start
+        in: query
+        name: start
+        required: true
+        type: string
+      - description: number
+        in: query
+        name: num
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "404":
+          description: page not found
+          schema:
+            type: string
+      summary: List all nodes
+      tags:
+      - Listnodes
+swagger: "2.0"

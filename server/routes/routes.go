@@ -1,9 +1,13 @@
 package routes
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	_ "github.com/rockiecn/platform-v2/docs"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type Routes struct {
@@ -38,6 +42,10 @@ func RegistRoutes() Routes {
 	r := Routes{
 		router,
 	}
+
+	// for swagger
+	fmt.Print("register swagger")
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// for test
 	r.registRootRoute()

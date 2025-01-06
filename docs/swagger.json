@@ -1,0 +1,58 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is the grid platform",
+        "title": "PLATFORM-v2 API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8002",
+    "basePath": "/",
+    "paths": {
+        "/listnodes/": {
+            "get": {
+                "description": "list all nodes",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Listnodes"
+                ],
+                "summary": "List all nodes",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "start",
+                        "name": "start",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "number",
+                        "name": "num",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    "404": {
+                        "description": "page not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

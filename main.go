@@ -8,6 +8,15 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+//	@title			PLATFORM-v2 API
+//	@version		1.0
+//	@description	This is the grid platform
+//
+// //	@host			183.240.197.189:54502
+//
+//	@host			localhost:8002
+//
+//	@BasePath		/
 func main() {
 	local := make([]*cli.Command, 0, 1)
 	local = append(local, cmd.DaemonCmd)

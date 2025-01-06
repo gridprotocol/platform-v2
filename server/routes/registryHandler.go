@@ -52,6 +52,19 @@ func ListCpHandler() gin.HandlerFunc {
 }
 
 // list all nodes by specify node start and num
+// handler for list nodes
+// ListNodeHandler godoc
+//
+//	@Summary		List all nodes
+//	@Description	list all nodes
+//	@Tags			Listnodes
+//	@Accept			json
+//	@Produce		json
+//	@Param			start	query		string	true	"start"
+//	@Param			num		query		string	true	"number"
+//	@Success		200		{object}	int
+//	@Failure		404		{object}	string	"page not found"
+//	@Router			/listnodes/ [get]
 func ListNodeHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		start := c.Param("start")
@@ -60,14 +73,14 @@ func ListNodeHandler() gin.HandlerFunc {
 		iStart, _ := utils.StringToInt64(start)
 		iNum, _ := utils.StringToInt64(num)
 
-		providers, err := database.ListAllNodes(int(iStart), int(iNum))
+		nodes, err := database.ListAllNodes(int(iStart), int(iNum))
 		if err != nil {
 			logger.Error(err.Error())
 			c.AbortWithStatusJSON(500, err.Error())
 			return
 		}
 
-		c.JSON(200, providers)
+		c.JSON(200, nodes)
 	}
 }
 
