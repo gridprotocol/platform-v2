@@ -6,19 +6,129 @@ info:
   title: PLATFORM-v2 API
   version: "1.0"
 paths:
-  /listnodes/:
+  /v1/cp/{cp}:
+    get:
+      consumes:
+      - application/json
+      description: get a cp info
+      parameters:
+      - description: cp address
+        in: path
+        name: cp
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "404":
+          description: page not found
+          schema:
+            type: string
+      summary: get a cp info
+      tags:
+      - GetCpInfoHandler
+  /v1/cp/{cp}/node/list:
+    get:
+      consumes:
+      - application/json
+      description: list cp nodes
+      parameters:
+      - description: cp address
+        in: path
+        name: cp
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "404":
+          description: page not found
+          schema:
+            type: string
+      summary: list cp nodes
+      tags:
+      - CpNodeHandler
+  /v1/cp/list/{start}/{num}:
+    get:
+      consumes:
+      - application/json
+      description: list cp info
+      parameters:
+      - description: start
+        in: path
+        name: start
+        required: true
+        type: string
+      - description: num
+        in: path
+        name: num
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "404":
+          description: page not found
+          schema:
+            type: string
+      summary: list cp info
+      tags:
+      - ListCpHandler
+  /v1/node/{cp}/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get a node
+      parameters:
+      - description: cp address
+        in: path
+        name: cp
+        required: true
+        type: string
+      - description: node id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "404":
+          description: page not found
+          schema:
+            type: string
+      summary: get a node
+      tags:
+      - GetNodeHandler
+  /v1/node/list/{start}/{num}:
     get:
       consumes:
       - application/json
       description: list all nodes
       parameters:
       - description: start
-        in: query
+        in: path
         name: start
         required: true
         type: string
       - description: number
-        in: query
+        in: path
         name: num
         required: true
         type: string
@@ -36,4 +146,154 @@ paths:
       summary: List all nodes
       tags:
       - Listnodes
+  /v1/order/{id}/info:
+    get:
+      consumes:
+      - application/json
+      description: get order by id
+      parameters:
+      - description: order id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "404":
+          description: page not found
+          schema:
+            type: string
+      summary: get order by id
+      tags:
+      - GetOrderHandler
+  /v1/order/fee/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get the fee of an order by id
+      parameters:
+      - description: order id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "404":
+          description: page not found
+          schema:
+            type: string
+      summary: get the fee of an order by id
+      tags:
+      - FeeOrderHandler
+  /v1/provider/{address}/count:
+    get:
+      consumes:
+      - application/json
+      description: get order count of a provider
+      parameters:
+      - description: provider address
+        in: path
+        name: address
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "404":
+          description: page not found
+          schema:
+            type: string
+      summary: get order count of a provider
+      tags:
+      - GetOrderCountHandler
+  /v1/user/{address}/order/list:
+    get:
+      consumes:
+      - application/json
+      description: list an user orders
+      parameters:
+      - description: user address
+        in: path
+        name: address
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "404":
+          description: page not found
+          schema:
+            type: string
+      summary: List an user orders
+      tags:
+      - ListUserOrders
+  /v1/user/{address}/provider/list:
+    get:
+      consumes:
+      - application/json
+      description: list cp of an user with active orders
+      parameters:
+      - description: user address
+        in: path
+        name: address
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "404":
+          description: page not found
+          schema:
+            type: string
+      summary: list cp of an user with active orders
+      tags:
+      - ListOrderedProviderHandler
+  /v1/user/node/list/{user}:
+    get:
+      consumes:
+      - application/json
+      description: list an usernodes
+      parameters:
+      - description: user
+        in: path
+        name: user
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "404":
+          description: page not found
+          schema:
+            type: string
+      summary: List an user nodes
+      tags:
+      - ListUserNodes
 swagger: "2.0"

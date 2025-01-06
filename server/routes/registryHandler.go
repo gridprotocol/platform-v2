@@ -16,6 +16,19 @@ var (
 )
 
 // get cp info
+// get a cp info
+// handler for get a cp info
+// GetCpInfoHandler godoc
+//
+//	@Summary		get a cp info
+//	@Description	get a cp info
+//	@Tags			GetCpInfoHandler
+//	@Accept			json
+//	@Produce		json
+//	@Param			cp	path		string	true	"cp address"
+//	@Success		200		{object}	int
+//	@Failure		404		{object}	string	"page not found"
+//	@Router			/v1/cp/{cp} [get]
 func GetCpInfoHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		cp := c.Param("cp")
@@ -32,6 +45,19 @@ func GetCpInfoHandler() gin.HandlerFunc {
 }
 
 // list all cp
+// handler for list cp
+// ListCpHandler godoc
+//
+//	@Summary		list cp info
+//	@Description	list cp info
+//	@Tags			ListCpHandler
+//	@Accept			json
+//	@Produce		json
+//	@Param			start	path		string	true	"start"
+//	@Param			num	path		string	true	"num"
+//	@Success		200		{object}	int
+//	@Failure		404		{object}	string	"page not found"
+//	@Router			/v1/cp/list/{start}/{num} [get]
 func ListCpHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		start := c.Param("start")
@@ -60,11 +86,11 @@ func ListCpHandler() gin.HandlerFunc {
 //	@Tags			Listnodes
 //	@Accept			json
 //	@Produce		json
-//	@Param			start	query		string	true	"start"
-//	@Param			num		query		string	true	"number"
+//	@Param			start	path		string	true	"start"
+//	@Param			num		path		string	true	"number"
 //	@Success		200		{object}	int
 //	@Failure		404		{object}	string	"page not found"
-//	@Router			/listnodes/ [get]
+//	@Router			/v1/node/list/{start}/{num} [get]
 func ListNodeHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		start := c.Param("start")
@@ -84,20 +110,36 @@ func ListNodeHandler() gin.HandlerFunc {
 	}
 }
 
-// get node, nodeID = cp:id
+// get node
+// handler for get a node
+// GetNodeHandler godoc
+//
+//	@Summary		get a node
+//	@Description	get a node
+//	@Tags			GetNodeHandler
+//	@Accept			json
+//	@Produce		json
+//	@Param			cp	path		string	true	"cp address"
+//	@Param			id		path		string	true	"node id"
+//	@Success		200		{object}	int
+//	@Failure		404		{object}	string	"page not found"
+//	@Router			/v1/node/{cp}/{id} [get]
 func GetNodeHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		cpAddr := c.Param("cp")
 		nodeID := c.Param("id")
 
-		// parse cp and id
-		cp, id, err := decodeNodeID(nodeID)
-		if err != nil {
-			logger.Error(err.Error())
-			c.AbortWithStatusJSON(400, err.Error())
-			return
-		}
+		id, _ := utils.StringToUint64(nodeID)
 
-		node, err := database.GetNodeByCpAndId(cp, id)
+		// // parse cp and id
+		// cp, id, err := decodeNodeID(nodeID)
+		// if err != nil {
+		// 	logger.Error(err.Error())
+		// 	c.AbortWithStatusJSON(400, err.Error())
+		// 	return
+		// }
+
+		node, err := database.GetNodeByCpAndId(cpAddr, id)
 		if err != nil {
 			logger.Error(err.Error())
 			c.AbortWithStatusJSON(400, err.Error())
@@ -109,9 +151,21 @@ func GetNodeHandler() gin.HandlerFunc {
 }
 
 // get node list of a cp
+// handler for get node list of a cp
+// CpNodeHandler godoc
+//
+//	@Summary		list cp nodes
+//	@Description	list cp nodes
+//	@Tags			CpNodeHandler
+//	@Accept			json
+//	@Produce		json
+//	@Param			cp	path		string	true	"cp address"
+//	@Success		200		{object}	int
+//	@Failure		404		{object}	string	"page not found"
+//	@Router			/v1/cp/{cp}/node/list [get]
 func CpNodeHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		cp := c.Query("cp")
+		cp := c.Param("cp")
 
 		var nodes []database.NodeStore
 		var err error
@@ -127,6 +181,20 @@ func CpNodeHandler() gin.HandlerFunc {
 	}
 }
 
+// list all nodes of an user
+// handler for list user nodes
+// ListUserNodesHandler godoc
+//
+//	@Summary		List an user nodes
+//	@Description	list an usernodes
+//	@Tags			ListUserNodes
+//	@Accept			json
+//	@Produce		json
+//	@Param			user	path		string	true	"user"
+//	@Success		200		{object}	int
+//	@Failure		404		{object}	string	"page not found"
+//	@Router			/v1/user/node/list/{user} [get]
+//
 // get node list by an user
 func ListUserNodesHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {

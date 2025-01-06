@@ -7,6 +7,18 @@ import (
 )
 
 // get order by id
+// handler for get order by id
+// GetOrderHandler godoc
+//
+//	@Summary		get order by id
+//	@Description	get order by id
+//	@Tags			GetOrderHandler
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	path		string	true	"order id"
+//	@Success		200		{object}	int
+//	@Failure		404		{object}	string	"page not found"
+//	@Router			/v1/order/{id}/info [get]
 func GetOrderHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		id := c.Param("id")
@@ -40,6 +52,19 @@ func GetOrdersHandler() gin.HandlerFunc {
 }
 
 // orders of an user
+// list all orders of an user
+// handler for list user orders
+// ListUserOrderHandler godoc
+//
+//	@Summary		List an user orders
+//	@Description	list an user orders
+//	@Tags			ListUserOrders
+//	@Accept			json
+//	@Produce		json
+//	@Param			address	path		string	true	"user address"
+//	@Success		200		{object}	int
+//	@Failure		404		{object}	string	"page not found"
+//	@Router			/v1/user/{address}/order/list [get]
 func ListUserOrderHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		user := c.Param("address")
@@ -69,7 +94,18 @@ func ListUserActivedOrderHandler() gin.HandlerFunc {
 	}
 }
 
-// list cp of an user
+// list cp of an user with active orders
+// ListOrderedProviderHandler godoc
+//
+//	@Summary		list cp of an user with active orders
+//	@Description	list cp of an user with active orders
+//	@Tags			ListOrderedProviderHandler
+//	@Accept			json
+//	@Produce		json
+//	@Param			address	path		string	true	"user address"
+//	@Success		200		{object}	int
+//	@Failure		404		{object}	string	"page not found"
+//	@Router			/v1/user/{address}/provider/list [get]
 func ListOrderedProviderHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// user address
@@ -86,6 +122,17 @@ func ListOrderedProviderHandler() gin.HandlerFunc {
 }
 
 // get order count of a provider
+// GetOrderCountHandler godoc
+//
+//	@Summary		get order count of a provider
+//	@Description	get order count of a provider
+//	@Tags			GetOrderCountHandler
+//	@Accept			json
+//	@Produce		json
+//	@Param			address	path		string	true	"provider address"
+//	@Success		200		{object}	int
+//	@Failure		404		{object}	string	"page not found"
+//	@Router			/v1/provider/{address}/count [get]
 func GetOrderCountHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// provider address
@@ -102,6 +149,17 @@ func GetOrderCountHandler() gin.HandlerFunc {
 }
 
 // get the fee of an order
+// FeeOrderHandler godoc
+//
+//	@Summary		get the fee of an order by id
+//	@Description	get the fee of an order by id
+//	@Tags			FeeOrderHandler
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	path		string	true	"order id"
+//	@Success		200		{object}	int
+//	@Failure		404		{object}	string	"page not found"
+//	@Router			/v1/order/fee/{id} [get]
 func FeeOrderHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// order id

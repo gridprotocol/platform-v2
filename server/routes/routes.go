@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	_ "github.com/rockiecn/platform-v2/docs"
+	_ "github.com/gridprotocol/platform-v2/docs"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -88,7 +88,7 @@ func (r Routes) registNodeRoute() {
 	//todo: node statics, currently get from contracts
 
 	// id = cp:id
-	r.GET("/v1/node/:id", GetNodeHandler())
+	r.GET("/v1/node/:cp/:id", GetNodeHandler())
 }
 
 // order
@@ -103,7 +103,7 @@ func (r Routes) registOrderRoute() {
 	// orders of an user
 	r.GET("/v1/user/:address/order/list", ListUserOrderHandler())
 
-	// list providers of an user
+	// list providers of an user with active orders
 	r.GET("/v1/user/:address/provider/list", ListOrderedProviderHandler())
 
 	// get order count of a provider
