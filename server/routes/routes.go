@@ -89,6 +89,9 @@ func (r Routes) registNodeRoute() {
 
 	// id = cp:id
 	r.GET("/v1/node/:cp/:id", GetNodeHandler())
+
+	// set node status, in must be true or false
+	r.POST("/v1/node/:cp/:id/:status/:in", SetNodeStatusHandler())
 }
 
 // order
@@ -108,6 +111,7 @@ func (r Routes) registOrderRoute() {
 
 	// get order count of a provider
 	r.GET("/v1/provider/:address/count", GetOrderCountHandler())
+
 }
 
 func cors() gin.HandlerFunc {

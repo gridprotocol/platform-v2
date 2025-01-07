@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -150,6 +151,48 @@ func GetNodeHandler() gin.HandlerFunc {
 	}
 }
 
+// set node's status
+func SetNodeStatusHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		cpAddr := c.Param("cp")
+		nodeID := c.Param("id")
+		status := c.Param("status")
+		in := c.Param("in")
+		var bVal bool
+
+		switch in {
+		case "true":
+			bVal = true
+		case "false":
+			bVal = false
+		default:
+			c.AbortWithStatusJSON(400, fmt.Errorf("in must be true or false"))
+			return
+		}
+
+		id, _ := utils.StringToUint64(nodeID)
+
+		switch status {
+		case "exist":
+			database.SetExist(cpAddr, id, bVal)
+		case "sold":
+			database.SetSold(cpAddr, id, bVal)
+		case "avail":
+			database.SetAvail(cpAddr, id, bVal)
+		case "online":
+			database.SetOnline(cpAddr, id, bVal)
+		default:
+			c.AbortWithStatusJSON(400, fmt.Errorf("status must be exist, sold, avail, online"))
+			return
+		}
+
+		c.JSON(200, gin.H{
+			"code":    200,
+			"message": "Success",
+		})
+	}
+}
+
 // get node list of a cp
 // handler for get node list of a cp
 // CpNodeHandler godoc
@@ -200,7 +243,7 @@ func ListUserNodesHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		user := c.Param("user")
 
-		var nodes []database.NodeStore
+		var nodes []database.NodeAdaptor
 		var err error
 
 		nodes, err = database.ListAllNodesByUser(user)
