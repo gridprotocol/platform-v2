@@ -148,6 +148,95 @@ func GetOrderCountHandler() gin.HandlerFunc {
 	}
 }
 
+// get global info
+func GetGlobalHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		g, err := database.GetGlobal()
+		if err != nil {
+			logger.Error(err.Error())
+			c.AbortWithStatusJSON(500, err.Error())
+			return
+		}
+
+		c.JSON(200, gin.H{
+			"global": g,
+		})
+	}
+}
+
+// increase cp num by 1
+func IncCpHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		err := database.IncCp()
+		if err != nil {
+			logger.Error(err.Error())
+			c.AbortWithStatusJSON(500, err.Error())
+			return
+		}
+
+		c.JSON(200, gin.H{
+			"result": "success",
+		})
+	}
+}
+
+func IncNodeHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		mem := c.Param("mem")
+		disk := c.Param("disk")
+		mem64, _ := utils.StringToInt64(mem)
+		disk64, _ := utils.StringToInt64(disk)
+		err := database.IncNode(mem64, disk64)
+		if err != nil {
+			logger.Error(err.Error())
+			c.AbortWithStatusJSON(500, err.Error())
+			return
+		}
+
+		c.JSON(200, gin.H{
+			"result": "success",
+		})
+	}
+}
+
+func IncUsedHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		mem := c.Param("mem")
+		disk := c.Param("disk")
+		mem64, _ := utils.StringToInt64(mem)
+		disk64, _ := utils.StringToInt64(disk)
+		err := database.IncUsed(mem64, disk64)
+		if err != nil {
+			logger.Error(err.Error())
+			c.AbortWithStatusJSON(500, err.Error())
+			return
+		}
+
+		c.JSON(200, gin.H{
+			"result": "success",
+		})
+	}
+}
+
+func DecUsedHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		mem := c.Param("mem")
+		disk := c.Param("disk")
+		mem64, _ := utils.StringToInt64(mem)
+		disk64, _ := utils.StringToInt64(disk)
+		err := database.DecUsed(mem64, disk64)
+		if err != nil {
+			logger.Error(err.Error())
+			c.AbortWithStatusJSON(500, err.Error())
+			return
+		}
+
+		c.JSON(200, gin.H{
+			"result": "success",
+		})
+	}
+}
+
 // get the fee of an order
 // FeeOrderHandler godoc
 //

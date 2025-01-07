@@ -54,6 +54,7 @@ func RegistRoutes() Routes {
 	r.registCpRoute()
 	r.registNodeRoute()
 	r.registOrderRoute()
+	r.registGlobalRoute()
 
 	return r
 }
@@ -114,6 +115,19 @@ func (r Routes) registOrderRoute() {
 
 }
 
+// global
+func (r Routes) registGlobalRoute() {
+	// get global info
+	r.GET("/v1/global/", GetGlobalHandler())
+
+	// increase cp num
+	r.POST("v1/global/inccp/", IncCpHandler())
+	r.POST("v1/global/incnode/:mem/:disk", IncNodeHandler())
+	r.POST("v1/global/incused/:mem/:disk", IncUsedHandler())
+	r.POST("v1/global/decused/:mem/:disk", DecUsedHandler())
+}
+
+// cors operation
 func cors() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		method := c.Request.Method
