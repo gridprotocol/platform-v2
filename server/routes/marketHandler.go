@@ -27,8 +27,13 @@ func GetOrderHandler() gin.HandlerFunc {
 		order, err := database.GetOrderById(id64)
 		if err != nil {
 			logger.Error(err.Error())
-			c.AbortWithStatusJSON(500, err.Error())
-			return
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
 		}
 
 		c.JSON(200, order)
@@ -43,8 +48,13 @@ func GetOrdersHandler() gin.HandlerFunc {
 		orders, err := database.GetOrdersByUser(user)
 		if err != nil {
 			logger.Error(err.Error())
-			c.AbortWithStatusJSON(500, err.Error())
-			return
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
 		}
 
 		c.JSON(200, orders)
@@ -71,8 +81,13 @@ func ListUserOrderHandler() gin.HandlerFunc {
 		orders, err := database.ListAllOrderByUser(user)
 		if err != nil {
 			logger.Error(err.Error())
-			c.AbortWithStatusJSON(500, err.Error())
-			return
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
 		}
 
 		c.JSON(200, orders)
@@ -86,8 +101,13 @@ func LisProviderOrderHandler() gin.HandlerFunc {
 		orders, err := database.ListAllOrderByProvider(provider)
 		if err != nil {
 			logger.Error(err.Error())
-			c.AbortWithStatusJSON(500, err.Error())
-			return
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
 		}
 
 		c.JSON(200, orders)
@@ -101,8 +121,13 @@ func ListUserActivedOrderHandler() gin.HandlerFunc {
 		orders, err := database.ListAllActivedOrderByUser(user)
 		if err != nil {
 			logger.Error(err.Error())
-			c.AbortWithStatusJSON(500, err.Error())
-			return
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
 		}
 
 		c.JSON(200, orders)
@@ -128,8 +153,13 @@ func ListOrderedProviderHandler() gin.HandlerFunc {
 		providers, err := database.ListAllOrderedProvider(address)
 		if err != nil {
 			logger.Error(err.Error())
-			c.AbortWithStatusJSON(500, err.Error())
-			return
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
 		}
 
 		c.JSON(200, providers)
@@ -155,8 +185,13 @@ func GetOrderCountHandler() gin.HandlerFunc {
 		cnt, err := database.GetOrderCount(address)
 		if err != nil {
 			logger.Error(err.Error())
-			c.AbortWithStatusJSON(500, err.Error())
-			return
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
 		}
 
 		c.JSON(200, cnt)
@@ -169,8 +204,13 @@ func GetGlobalHandler() gin.HandlerFunc {
 		g, err := database.GetGlobal()
 		if err != nil {
 			logger.Error(err.Error())
-			c.AbortWithStatusJSON(500, err.Error())
-			return
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
 		}
 
 		c.JSON(200, gin.H{

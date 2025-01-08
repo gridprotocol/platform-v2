@@ -2,13 +2,11 @@ package routes
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gridprotocol/dumper/database"
 	"github.com/gridprotocol/platform-v2/lib/utils"
 	"github.com/gridprotocol/platform-v2/logs"
-	"golang.org/x/xerrors"
 )
 
 var (
@@ -37,8 +35,13 @@ func GetCpInfoHandler() gin.HandlerFunc {
 		provider, err := database.GetProviderByAddress(cp)
 		if err != nil {
 			logger.Error(err.Error())
-			c.AbortWithStatusJSON(400, err.Error())
-			return
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
 		}
 
 		c.JSON(200, provider)
@@ -70,8 +73,13 @@ func ListCpHandler() gin.HandlerFunc {
 		providers, err := database.ListAllProviders(int(iStart), int(iNum))
 		if err != nil {
 			logger.Error(err.Error())
-			c.AbortWithStatusJSON(500, err.Error())
-			return
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
 		}
 
 		c.JSON(200, providers)
@@ -103,8 +111,13 @@ func ListNodeHandler() gin.HandlerFunc {
 		nodes, err := database.ListAllNodes(int(iStart), int(iNum))
 		if err != nil {
 			logger.Error(err.Error())
-			c.AbortWithStatusJSON(500, err.Error())
-			return
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
 		}
 
 		c.JSON(200, nodes)
@@ -143,8 +156,13 @@ func GetNodeHandler() gin.HandlerFunc {
 		node, err := database.GetNodeByCpAndId(cpAddr, id)
 		if err != nil {
 			logger.Error(err.Error())
-			c.AbortWithStatusJSON(400, err.Error())
-			return
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
 		}
 
 		c.JSON(200, node)
@@ -248,8 +266,13 @@ func CpNodeHandler() gin.HandlerFunc {
 		nodes, err = database.ListAllNodesByCp(cp)
 		if err != nil {
 			logger.Error(err.Error())
-			c.AbortWithStatusJSON(500, err.Error())
-			return
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
 		}
 
 		c.JSON(200, nodes)
@@ -281,31 +304,36 @@ func ListUserNodesHandler() gin.HandlerFunc {
 		nodes, err = database.ListAllNodesByUser(user)
 		if err != nil {
 			logger.Error(err.Error())
-			c.AbortWithStatusJSON(500, err.Error())
-			return
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
 		}
 
 		c.JSON(200, nodes)
 	}
 }
 
-func decodeNodeID(nodeID string) (string, uint64, error) {
-	results := strings.Split(nodeID, ":")
+// func decodeNodeID(nodeID string) (string, uint64, error) {
+// 	results := strings.Split(nodeID, ":")
 
-	if len(results) != 2 {
-		return "", 0, xerrors.Errorf("node id(%s) Format Error, it should be {address}:{id}", nodeID)
-	}
+// 	if len(results) != 2 {
+// 		return "", 0, xerrors.Errorf("node id(%s) Format Error, it should be {address}:{id}", nodeID)
+// 	}
 
-	// id, err := strconv.Atoi(results[1])
-	// if err != nil {
-	// 	return "", 0, xerrors.Errorf("can't parse %s to int, %s", results[1], err.Error())
-	// }
+// 	// id, err := strconv.Atoi(results[1])
+// 	// if err != nil {
+// 	// 	return "", 0, xerrors.Errorf("can't parse %s to int, %s", results[1], err.Error())
+// 	// }
 
-	// string to uint64
-	id, err := utils.StringToUint64(results[1])
-	if err != nil {
-		return "", 0, xerrors.Errorf("can't parse %s to uint64, %s", results[1], err.Error())
-	}
+// 	// string to uint64
+// 	id, err := utils.StringToUint64(results[1])
+// 	if err != nil {
+// 		return "", 0, xerrors.Errorf("can't parse %s to uint64, %s", results[1], err.Error())
+// 	}
 
-	return results[0], id, nil
-}
+// 	return results[0], id, nil
+// }
