@@ -107,11 +107,20 @@ func (r Routes) registOrderRoute() {
 	// orders of an user
 	r.GET("/v1/user/:address/order/list", ListUserOrderHandler())
 
+	// orders of a provider
+	r.GET("/v1/provider/:address/order/list", LisProviderOrderHandler())
+
 	// list providers of an user with active orders
 	r.GET("/v1/user/:address/provider/list", ListOrderedProviderHandler())
 
 	// get order count of a provider
 	r.GET("/v1/provider/:address/count", GetOrderCountHandler())
+
+	// set order status
+	r.POST("/v1/order/:oid/:st", SetOrderStatusHandler())
+
+	// check orders of a provider, if order is end, set status=4
+	r.POST("/v1/check/order/:provider", CheckProviderOrderStatusHandler())
 
 }
 

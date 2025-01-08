@@ -193,6 +193,38 @@ func SetNodeStatusHandler() gin.HandlerFunc {
 	}
 }
 
+// set an order's status
+func SetOrderStatusHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		oid := c.Param("oid")
+		st := c.Param("st")
+
+		oid64, _ := utils.StringToUint64(oid)
+		st64, _ := utils.StringToUint64(st)
+
+		database.SetOrderStatus(oid64, st64)
+
+		c.JSON(200, gin.H{
+			"code":    200,
+			"message": "Success",
+		})
+	}
+}
+
+// check a provider's all orders, set status=4 if an order is end
+func CheckProviderOrderStatusHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		provider := c.Param("provider")
+
+		database.CheckProviderOrders(provider)
+
+		c.JSON(200, gin.H{
+			"code":    200,
+			"message": "Success",
+		})
+	}
+}
+
 // get node list of a cp
 // handler for get node list of a cp
 // CpNodeHandler godoc

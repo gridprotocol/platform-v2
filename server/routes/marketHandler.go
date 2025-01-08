@@ -79,6 +79,21 @@ func ListUserOrderHandler() gin.HandlerFunc {
 	}
 }
 
+// list a provider's all orders
+func LisProviderOrderHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		provider := c.Param("address")
+		orders, err := database.ListAllOrderByProvider(provider)
+		if err != nil {
+			logger.Error(err.Error())
+			c.AbortWithStatusJSON(500, err.Error())
+			return
+		}
+
+		c.JSON(200, orders)
+	}
+}
+
 // active orders of an user
 func ListUserActivedOrderHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
