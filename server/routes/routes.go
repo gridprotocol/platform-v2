@@ -137,6 +137,9 @@ func (r Routes) registGlobalRoute() {
 	r.POST("v1/global/incnode/:mem/:disk", IncNodeHandler())
 	r.POST("v1/global/incused/:mem/:disk", IncUsedHandler())
 	r.POST("v1/global/decused/:mem/:disk", DecUsedHandler())
+
+	// query credit for an address
+	r.GET("/querycredit", QueryCreditHandler)
 }
 
 // cors operation

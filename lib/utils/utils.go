@@ -10,6 +10,8 @@ import (
 	"github.com/pkg/errors"
 )
 
+var Chain_Endpoint string
+
 // IntToBytes 将int类型的数转化为字节并以小端存储
 func IntToBytes(intNum int) []byte {
 	uint16Num := uint16(intNum)

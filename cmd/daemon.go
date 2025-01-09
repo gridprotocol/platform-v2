@@ -23,6 +23,8 @@ import (
 	"github.com/gridprotocol/platform-v2/server"
 	"github.com/mitchellh/go-homedir"
 	"github.com/urfave/cli/v2"
+
+	"github.com/gridprotocol/platform-v2/lib/utils"
 )
 
 var logger = logs.Logger("daemon")
@@ -75,6 +77,8 @@ var runCmd = &cli.Command{
 			chain_ep = eth.Sepolia
 			comm.Contracts = comm.SepoContracts.Contracts
 		}
+		// save chain ep
+		utils.Chain_Endpoint = chain_ep
 
 		logger.Infof("chain selected:%s, chain endpoint:%s\n", chain, chain_ep)
 		logger.Infof("contract addresses:", comm.Contracts)

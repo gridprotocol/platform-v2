@@ -2,9 +2,15 @@ package routes
 
 import (
 	"fmt"
+	"net/http"
 
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/gin-gonic/gin"
+	"github.com/grid/contracts/eth"
+	"github.com/grid/contracts/go/credit"
 	"github.com/gridprotocol/dumper/database"
+	comm "github.com/gridprotocol/platform-v2/common"
 	"github.com/gridprotocol/platform-v2/lib/utils"
 	"github.com/gridprotocol/platform-v2/logs"
 )
@@ -417,3 +423,29 @@ func GetGlobalHandler() gin.HandlerFunc {
 
 // 	return results[0], id, nil
 // }
+
+func QueryCreditHandler(c *gin.Context) {
+	userAddr := c.Query("address")
+	creditAddr := comm.Contracts.Credit
+
+	// connect to an eth node with ep
+	backend, chainID := eth.ConnETH(utils.Chain_Endpoint)
+	fmt.Println("chain id:", chainID)
+
+	// get credit instance
+	creditIns, err := credit.NewCredit(common.HexToAddress(creditAddr), backend)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	// query balance
+	bal, err := creditIns.BalanceOf(&bind.CallOpts{}, common.HexToAddress(userAddr))
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"credit balance": bal})
+
+}
