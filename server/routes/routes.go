@@ -76,6 +76,9 @@ func (r Routes) registCpRoute() {
 
 	// get node list of a cp
 	r.GET("/v1/cp/:cp/node/list", CpNodeHandler())
+
+	// get cp count
+	r.GET("/v1/cp/count", CpCountHandler())
 }
 
 // node

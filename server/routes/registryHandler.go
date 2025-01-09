@@ -279,6 +279,30 @@ func CpNodeHandler() gin.HandlerFunc {
 	}
 }
 
+// get cp count
+func CpCountHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+
+		var err error
+
+		cnt, err := database.GetProviderCount()
+		if err != nil {
+			logger.Error(err.Error())
+			if err.Error() == "record not found" {
+				c.AbortWithStatusJSON(200, gin.H{})
+				return
+			} else {
+				c.AbortWithStatusJSON(400, err.Error())
+				return
+			}
+		}
+
+		c.JSON(200, gin.H{
+			"count": cnt,
+		})
+	}
+}
+
 // list all nodes of an user
 // handler for list user nodes
 // ListUserNodesHandler godoc
@@ -314,6 +338,58 @@ func ListUserNodesHandler() gin.HandlerFunc {
 		}
 
 		c.JSON(200, nodes)
+	}
+}
+
+type Global struct {
+	CpNum      int64 `json:"cpNumber"`
+	NodeGlobal int64 `json:"nodeGlobal"`
+	NodeUsed   int64 `json:"nodeUsed"`
+	MemGlobal  int64 `json:"memGlobal"`
+	DiskGlobal int64 `json:"diskGlobal"`
+	MemUsed    int64 `json:"memUsed"`
+	DiskUsed   int64 `json:"diskUsed"`
+}
+
+// get global info
+func GetGlobalHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		g := Global{}
+		var err error
+
+		g.CpNum, err = database.GetProviderCount()
+		if err != nil {
+			c.AbortWithStatusJSON(400, fmt.Sprintf("get cp count error: %s", err.Error()))
+			return
+		}
+
+		g.NodeGlobal, err = database.GetNodeCount()
+		if err != nil {
+			c.AbortWithStatusJSON(400, fmt.Sprintf("get node count error: %s", err.Error()))
+			return
+		}
+
+		g.NodeUsed, err = database.GetNodeCountInOrders()
+		if err != nil {
+			c.AbortWithStatusJSON(400, fmt.Sprintf("get node count error: %s", err.Error()))
+			return
+		}
+
+		g.MemGlobal, g.DiskGlobal, err = database.GetTotalResources()
+		if err != nil {
+			c.AbortWithStatusJSON(400, fmt.Sprintf("get total mem error: %s", err.Error()))
+			return
+		}
+
+		g.MemUsed, g.DiskUsed, err = database.GetUsedResources()
+		if err != nil {
+			c.AbortWithStatusJSON(400, fmt.Sprintf("get used mem error: %s", err.Error()))
+			return
+		}
+
+		c.JSON(200, gin.H{
+			"global": g,
+		})
 	}
 }
 

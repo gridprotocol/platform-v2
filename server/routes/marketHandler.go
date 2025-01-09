@@ -198,27 +198,6 @@ func GetOrderCountHandler() gin.HandlerFunc {
 	}
 }
 
-// get global info
-func GetGlobalHandler() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		g, err := database.GetGlobal()
-		if err != nil {
-			logger.Error(err.Error())
-			if err.Error() == "record not found" {
-				c.AbortWithStatusJSON(200, gin.H{})
-				return
-			} else {
-				c.AbortWithStatusJSON(400, err.Error())
-				return
-			}
-		}
-
-		c.JSON(200, gin.H{
-			"global": g,
-		})
-	}
-}
-
 // increase cp num by 1
 func IncCpHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
