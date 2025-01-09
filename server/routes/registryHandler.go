@@ -449,3 +449,33 @@ func QueryCreditHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"credit balance": bal})
 
 }
+
+func AllowanceHandler(c *gin.Context) {
+	// param in form
+	owner := c.Query("owner")
+	spender := c.Query("spender")
+
+	// connect to an eth node with ep
+	logger.Info("connecting chain")
+	backend, chainID := eth.ConnETH(utils.Chain_Endpoint)
+	logger.Info("chain id:", chainID)
+
+	// get contract instance
+	creditIns, err := credit.NewCredit(common.HexToAddress(comm.Contracts.Credit), backend)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, fmt.Errorf("new credit instance failed: %v", err))
+		return
+	}
+
+	// get allowance
+	allow, err := creditIns.Allowance(&bind.CallOpts{}, common.HexToAddress(owner), common.HexToAddress(spender))
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	logger.Infof("allowance:", allow)
+
+	// response
+	c.JSON(http.StatusOK, gin.H{"allowance": allow})
+}

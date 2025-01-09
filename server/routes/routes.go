@@ -140,6 +140,7 @@ func (r Routes) registGlobalRoute() {
 
 	// query credit for an address
 	r.GET("/querycredit", QueryCreditHandler)
+	r.GET("/allowance", AllowanceHandler)
 }
 
 // cors operation
