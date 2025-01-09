@@ -123,7 +123,7 @@ func (r Routes) registOrderRoute() {
 	r.POST("/v1/order/:oid/:st", SetOrderStatusHandler())
 
 	// check orders of a provider, if order is end, set status=4
-	r.POST("/v1/check/order/:provider", CheckProviderOrderStatusHandler())
+	r.POST("/v1/check/order/:provider", UpdateOrderAndNodeStatusHandler())
 
 }
 

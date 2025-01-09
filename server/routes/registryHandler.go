@@ -229,12 +229,16 @@ func SetOrderStatusHandler() gin.HandlerFunc {
 	}
 }
 
-// check a provider's all orders, set status=4 if an order is end
-func CheckProviderOrderStatusHandler() gin.HandlerFunc {
+// check a provider's all orders, set status=4 if an order is end, and set the node's sold to false
+func UpdateOrderAndNodeStatusHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		provider := c.Param("provider")
 
-		database.CheckProviderOrders(provider)
+		err := database.UpdateOrderAndNodeStatus(provider)
+		if err != nil {
+			c.AbortWithStatusJSON(400, fmt.Sprintf("update provider's order and node status failed: %s", err.Error()))
+			return
+		}
 
 		c.JSON(200, gin.H{
 			"code":    200,
