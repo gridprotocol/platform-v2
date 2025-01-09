@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gridprotocol/dumper/database"
@@ -304,23 +303,19 @@ func FeeOrderHandlerID() gin.HandlerFunc {
 	}
 }
 
-type Order struct {
-	Id           uint64 // order id
-	User         string
-	Provider     string
-	Nid          uint64    // node id
-	ActivateTime time.Time `gorm:"column:activate"`
-	StartTime    time.Time `gorm:"column:start"`
-	EndTime      time.Time `gorm:"column:end"`
-	Probation    int64
-	Duration     int64
-	Status       int64
+// order info for calc order fee
+type OrderLite struct {
+	Provider string `json:"provider"`
+	// the node where the app is deployed
+	Nid uint64 `json:"node_id"`
+	// the service duration
+	Duration int64 `json:"duration"`
 }
 
 // calc order fee
 func FeeOrderHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var order Order
+		var order OrderLite
 		if err := c.ShouldBindJSON(&order); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
