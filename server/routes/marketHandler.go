@@ -1,6 +1,11 @@
 package routes
 
 import (
+	"fmt"
+	"net/http"
+	"strconv"
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"github.com/gridprotocol/dumper/database"
 	"github.com/gridprotocol/platform-v2/lib/utils"
@@ -283,7 +288,7 @@ func DecUsedHandler() gin.HandlerFunc {
 //	@Success		200		{object}	int
 //	@Failure		404		{object}	string	"page not found"
 //	@Router			/v1/order/fee/{id} [get]
-func FeeOrderHandler() gin.HandlerFunc {
+func FeeOrderHandlerID() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// order id
 		id := c.Param("id")
@@ -297,4 +302,56 @@ func FeeOrderHandler() gin.HandlerFunc {
 
 		c.JSON(200, fee)
 	}
+}
+
+type Order struct {
+	Id           uint64 // order id
+	User         string
+	Provider     string
+	Nid          uint64    // node id
+	ActivateTime time.Time `gorm:"column:activate"`
+	StartTime    time.Time `gorm:"column:start"`
+	EndTime      time.Time `gorm:"column:end"`
+	Probation    int64
+	Duration     int64
+	Status       int64
+}
+
+// calc order fee
+func FeeOrderHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var order Order
+		if err := c.ShouldBindJSON(&order); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		fmt.Println("order in body:", order)
+
+		// 根据 order 中的 provider 和 nid 查找对应的 node
+		node, err := database.GetNodeByCpAndId(order.Provider, order.Nid)
+		if err != nil {
+			c.AbortWithStatusJSON(400, fmt.Sprintf("get node error: %s", err.Error()))
+			return
+		}
+
+		// 计算费用
+		fee := calcOrderFee(node, order.Duration)
+
+		// 返回费用
+		c.JSON(http.StatusOK, gin.H{"fee": fee})
+	}
+}
+
+// calcOrderFee 计算订单费用
+func calcOrderFee(node database.Node, duration int64) float64 {
+	// 将价格字符串转换为浮点数
+	cpuPrice, _ := strconv.ParseFloat(node.CPUPrice.String(), 64)
+	gpuPrice, _ := strconv.ParseFloat(node.GPUPrice.String(), 64)
+	memPrice, _ := strconv.ParseFloat(node.MemPrice.String(), 64)
+	diskPrice, _ := strconv.ParseFloat(node.DiskPrice.String(), 64)
+
+	// 计算总费用
+	totalFee := (cpuPrice + gpuPrice + memPrice + diskPrice) * float64(duration)
+	return totalFee
 }

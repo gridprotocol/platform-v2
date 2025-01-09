@@ -105,7 +105,7 @@ func (r Routes) registOrderRoute() {
 
 	//r.GET("/v1/order/list/:user", GetOrdersHandler())
 	// order fee by id
-	r.GET("/v1/order/fee/:id", FeeOrderHandler())
+	r.POST("/v1/order/fee", FeeOrderHandler())
 
 	// orders of an user
 	r.GET("/v1/user/:address/order/list", ListUserOrderHandler())
