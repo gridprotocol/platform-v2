@@ -76,6 +76,12 @@ var runCmd = &cli.Command{
 		case "sepo":
 			chain_ep = eth.Sepolia
 			comm.Contracts = comm.SepoContracts.Contracts
+		case "product":
+			chain_ep = eth.ProductChain
+			comm.Contracts = comm.ProductContracts.Contracts
+		default:
+			logger.Info("Please input correct chain!")
+			return nil
 		}
 		// save chain ep
 		utils.Chain_Endpoint = chain_ep
