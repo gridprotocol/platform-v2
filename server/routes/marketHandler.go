@@ -40,7 +40,18 @@ func GetOrderHandler() gin.HandlerFunc {
 			}
 		}
 
-		c.JSON(200, order)
+		c.JSON(200, gin.H{
+			"Id":         order.Id,
+			"User":       order.User,
+			"Provider":   order.Provider,
+			"Nid":        order.Nid,
+			"ActiveTime": order.ActivateTime.Unix(),
+			"StartTime":  order.StartTime.Unix(),
+			"EndTime":    order.EndTime.Unix(),
+			"Probation":  order.Probation,
+			"Duration":   order.Duration,
+			"Status":     order.Status,
+		})
 	}
 }
 
