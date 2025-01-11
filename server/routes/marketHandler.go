@@ -51,6 +51,7 @@ func GetOrderHandler() gin.HandlerFunc {
 			"Probation":  order.Probation,
 			"Duration":   order.Duration,
 			"Status":     order.Status,
+			"Appname":    order.AppName,
 		})
 	}
 }
