@@ -166,7 +166,11 @@ func GetNodeHandler() gin.HandlerFunc {
 				c.AbortWithStatusJSON(200, gin.H{})
 				return
 			} else {
-				c.AbortWithStatusJSON(400, err.Error())
+				c.AbortWithStatusJSON(400,
+					gin.H{
+						"failed": err.Error(),
+					})
+
 				return
 			}
 		}
@@ -190,7 +194,10 @@ func SetNodeStatusHandler() gin.HandlerFunc {
 		case "false":
 			bVal = false
 		default:
-			c.AbortWithStatusJSON(400, fmt.Errorf("in must be true or false"))
+			c.AbortWithStatusJSON(400,
+				gin.H{
+					"failed": "in must be true or false",
+				})
 			return
 		}
 
@@ -206,7 +213,10 @@ func SetNodeStatusHandler() gin.HandlerFunc {
 		case "online":
 			database.SetOnline(cpAddr, id, bVal)
 		default:
-			c.AbortWithStatusJSON(400, fmt.Errorf("status must be exist, sold, avail, online"))
+			c.AbortWithStatusJSON(400,
+				gin.H{
+					"failed": "status must be exist, sold, avail, online",
+				})
 			return
 		}
 
@@ -302,7 +312,10 @@ func CpCountHandler() gin.HandlerFunc {
 				c.AbortWithStatusJSON(200, gin.H{})
 				return
 			} else {
-				c.AbortWithStatusJSON(400, err.Error())
+				c.AbortWithStatusJSON(400,
+					gin.H{
+						"failed": err.Error(),
+					})
 				return
 			}
 		}
