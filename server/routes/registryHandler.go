@@ -245,6 +245,22 @@ func SetOrderStatusHandler() gin.HandlerFunc {
 	}
 }
 
+// set an order's appname
+func SetOrderAppNameHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		oid := c.Param("oid")
+		app := c.Param("appname")
+		oid64, _ := utils.StringToUint64(oid)
+
+		database.SetOrderAppName(oid64, app)
+
+		c.JSON(200, gin.H{
+			"code":    200,
+			"message": "Success",
+		})
+	}
+}
+
 // check a provider's all orders, set status=4 if an order is end, and set the node's sold to false
 func UpdateOrderAndNodeStatusHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
