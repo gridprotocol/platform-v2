@@ -2,8 +2,8 @@ package routes
 
 import (
 	"fmt"
+	"math/big"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gridprotocol/dumper/database"
@@ -351,14 +351,20 @@ func FeeOrderHandler() gin.HandlerFunc {
 }
 
 // calcOrderFee 计算订单费用
-func calcOrderFee(node database.Node, duration int64) float64 {
-	// 将价格字符串转换为浮点数
-	cpuPrice, _ := strconv.ParseFloat(node.CPUPriceSec.String(), 64)
-	gpuPrice, _ := strconv.ParseFloat(node.GPUPriceSec.String(), 64)
-	memPrice, _ := strconv.ParseFloat(node.MemPriceSec.String(), 64)
-	diskPrice, _ := strconv.ParseFloat(node.DiskPriceSec.String(), 64)
+func calcOrderFee(node database.Node, duration int64) string {
+
+	m1 := new(big.Int).Mul(node.MemPriceSec, new(big.Int).SetInt64(node.MemCapacity))
+	m2 := new(big.Int).Mul(node.DiskPriceSec, new(big.Int).SetInt64(node.DiskCapacity))
 
 	// 计算总费用
-	totalFee := (cpuPrice + gpuPrice + memPrice + diskPrice) * float64(duration)
-	return totalFee
+	sum := big.NewInt(0)
+	sum.Add(sum, node.CPUPriceSec)
+	sum.Add(sum, node.GPUPriceSec)
+	sum.Add(sum, m1)
+	sum.Add(sum, m2)
+
+	total := big.NewInt(0)
+	total.Mul(sum, big.NewInt(0).SetInt64(duration))
+
+	return total.String()
 }
